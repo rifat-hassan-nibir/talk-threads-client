@@ -3,6 +3,8 @@ import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home";
 import JoinUs from "../pages/JoinUs";
 import Membership from "../pages/Membership";
+import DashboardLayout from "../layouts/DashboardLayout";
+import MyProfile from "../components/Dashboard/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,16 @@ const router = createBrowserRouter([
       {
         path: "/membership",
         element: <Membership></Membership>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        index: true,
+        element: <MyProfile></MyProfile>,
       },
     ],
   },
