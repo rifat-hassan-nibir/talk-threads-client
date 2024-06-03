@@ -1,8 +1,8 @@
 const Hero = () => {
   return (
     <div>
-      <section className="bg-white mt-10">
-        <div className="container px-6 py-16 mx-auto text-center">
+      <section className="bg-white my-20">
+        <div className="container px-4 mx-auto text-center">
           <div className="max-w-lg mx-auto">
             <h1 className="text-3xl font-bold text-gray-800 lg:text-4xl">
               Welcome to <span className="text-primary">Talk Threads</span>
