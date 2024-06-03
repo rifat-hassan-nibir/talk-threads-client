@@ -17,6 +17,9 @@ const Navbar = () => {
               <li>
                 <Link to="/join-us">Join Us</Link>
               </li>
+              <li>
+                <Link to="/membership">Membership</Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -38,10 +41,25 @@ const Navbar = () => {
             </div>
           </button>
           {/* Avatar */}
-          <div className="avatar">
-            <div className="size-10 rounded-full">
-              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="flex justify-center items-center">
+              <div className="avatar">
+                <div className="size-10 rounded-full">
+                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                </div>
+              </div>
             </div>
+            <ul tabIndex={0} className="dropdown-content z-[1] mt-3 menu shadow bg-base-100 rounded w-52">
+              <li>
+                <p>Username</p>
+              </li>
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+              <li>
+                <button>Logout</button>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
