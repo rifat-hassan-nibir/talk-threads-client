@@ -9,13 +9,13 @@ const Home = () => {
       <Hero></Hero>
       <div className=" bg-slate-50 rounded-2xl">
         <div className="grid lg:grid-cols-12 gap-4 container mx-auto py-8">
-          <div className="col-span-3 bg-white p-5">
+          <div className="col-span-3 bg-white p-5 rounded-lg shadow-lg shadow-gray-100">
             <AllTags></AllTags>
           </div>
-          <div className="col-span-6  bg-white p-5">
+          <div className="col-span-6  bg-white p-5 rounded-lg shadow-lg shadow-gray-100">
             <AllPosts></AllPosts>
           </div>
-          <div className="col-span-3  bg-white p-5">
+          <div className="col-span-3  bg-white p-5 rounded-lg shadow-lg shadow-gray-100">
             <Announcement></Announcement>
           </div>
         </div>
