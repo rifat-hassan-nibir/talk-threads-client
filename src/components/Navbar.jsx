@@ -10,7 +10,7 @@ const Navbar = () => {
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle text-white">
               <FiMenu className="size-5" />
             </div>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded w-52">
+            <ul tabIndex={0} className="menu dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded w-52 font-semibold">
               <li>
                 <Link to="/">Home</Link>
               </li>
@@ -49,7 +49,7 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-            <ul tabIndex={0} className="dropdown-content z-[1] mt-3 menu shadow bg-base-100 rounded w-52">
+            <ul tabIndex={0} className="dropdown-content font-semibold z-[1] mt-3 menu shadow bg-base-100 rounded w-52">
               <li>
                 <p>Username</p>
               </li>
