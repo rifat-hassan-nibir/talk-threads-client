@@ -8,7 +8,10 @@ const PostCard = () => {
       <div className="max-w-2xl px-8 py-4 border bg-gray-50 rounded-lg">
         <div className="flex items-center justify-between">
           <span className="text-sm font-light text-gray-600 ">Mar 10, 2019</span>
-          <p className="px-3 py-1 text-sm text-gray-100 transition-colors duration-300 transform bg-secondary rounded">Design</p>
+          <div className="flex gap-2">
+            <p className="px-3 py-1 text-sm text-gray-100 transition-colors duration-300 transform bg-secondary rounded">Design</p>
+            <p className="px-3 py-1 text-sm text-gray-100 transition-colors duration-300 transform bg-secondary rounded">Design</p>
+          </div>
         </div>
 
         <div className="mt-2">
