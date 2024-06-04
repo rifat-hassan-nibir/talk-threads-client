@@ -1,7 +1,7 @@
 const Announcement = () => {
   return (
     <div>
-      <h1>Announcement</h1>
+      <h2 className="lg:text-2xl text-xl font-bold">Announcements (5)</h2>
     </div>
   );
 };
