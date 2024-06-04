@@ -1,7 +1,9 @@
+import SectionTitle from "../SectionTitle";
+
 const Announcement = () => {
   return (
     <div>
-      <h2 className="lg:text-2xl text-xl font-bold">Announcements (5)</h2>
+      <SectionTitle title={"Announcements"}></SectionTitle>
     </div>
   );
 };

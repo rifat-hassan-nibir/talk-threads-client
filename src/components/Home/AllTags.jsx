@@ -1,7 +1,9 @@
+import SectionTitle from "../SectionTitle";
+
 const AllTags = () => {
   return (
     <div>
-      <h1 className="lg:text-2xl text-xl font-bold">All Tags</h1>
+      <SectionTitle title={"All Tags"}></SectionTitle>
     </div>
   );
 };
