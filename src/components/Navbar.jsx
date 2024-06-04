@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import noUser from "../assets/no-user.png";
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
   return (
     <div className="bg-primary">
@@ -18,9 +19,11 @@ const Navbar = () => {
               <li>
                 <Link to="/">Home</Link>
               </li>
-              <li>
-                <Link to="/join-us">Join Us</Link>
-              </li>
+              {!user && (
+                <li>
+                  <Link to="/join-us">Join Us</Link>
+                </li>
+              )}
               <li>
                 <Link to="/membership">Membership</Link>
               </li>
@@ -28,7 +31,9 @@ const Navbar = () => {
           </div>
         </div>
         <div className="navbar-center">
-          <a className="text-xl font-bold text-white">Talk Threads</a>
+          <Link to="/" className="text-xl font-bold text-white">
+            Talk Threads
+          </Link>
         </div>
         <div className="navbar-end gap-4">
           <button className="btn btn-ghost btn-circle text-white">
@@ -49,20 +54,24 @@ const Navbar = () => {
             <div tabIndex={0} role="button" className="flex justify-center items-center">
               <div className="avatar">
                 <div className="size-10 rounded-full">
-                  <img src={user.photoURL} />
+                  <img src={user ? user?.photoURL : noUser} />
                 </div>
               </div>
             </div>
             <ul tabIndex={0} className="dropdown-content font-semibold z-[1] mt-3 menu shadow bg-base-100 rounded w-52">
-              <li>
-                <p>{user.displayName}</p>
-              </li>
+              {user && (
+                <li>
+                  <p>{user?.displayName}</p>
+                </li>
+              )}
               <li>
                 <Link to="/dashboard">Dashboard</Link>
               </li>
-              <li>
-                <button>Logout</button>
-              </li>
+              {user && (
+                <li>
+                  <button onClick={logOut}>Logout</button>
+                </li>
+              )}
             </ul>
           </div>
         </div>
