@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="bg-primary">
       <div className="navbar px-0 container mx-auto">
@@ -45,13 +49,13 @@ const Navbar = () => {
             <div tabIndex={0} role="button" className="flex justify-center items-center">
               <div className="avatar">
                 <div className="size-10 rounded-full">
-                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                  <img src={user.photoURL} />
                 </div>
               </div>
             </div>
             <ul tabIndex={0} className="dropdown-content font-semibold z-[1] mt-3 menu shadow bg-base-100 rounded w-52">
               <li>
-                <p>Username</p>
+                <p>{user.displayName}</p>
               </li>
               <li>
                 <Link to="/dashboard">Dashboard</Link>

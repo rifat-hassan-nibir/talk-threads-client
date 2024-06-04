@@ -29,9 +29,7 @@ const PostCard = () => {
               src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=40&q=80"
               alt="avatar"
             />
-            <a className="font-bold text-gray-700 cursor-pointer" tabIndex="0" role="link">
-              Khatab wedaa
-            </a>
+            <p className="font-bold text-gray-700">Khatab wedaa</p>
           </div>
 
           {/* Comments */}

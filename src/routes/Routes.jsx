@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home";
-import JoinUs from "../pages/JoinUs";
 import Membership from "../pages/Membership";
 import DashboardLayout from "../layouts/DashboardLayout";
 import MyProfile from "../components/Dashboard/Common/MyProfile";
 import AddPost from "../components/Dashboard/Common/AddPost";
 import MyPosts from "../components/Dashboard/Common/MyPosts";
+import JoinUs from "../pages/Authentication/JoinUs";
+import Register from "../pages/Authentication/Register";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/join-us",
         element: <JoinUs></JoinUs>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
       },
       {
         path: "/membership",
