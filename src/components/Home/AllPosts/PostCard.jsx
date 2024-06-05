@@ -1,35 +1,31 @@
+/* eslint-disable react/prop-types */
 import { FaRegCommentAlt } from "react-icons/fa";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-const PostCard = () => {
+const PostCard = ({ post }) => {
+  const { _id, author_image, author_name, post_title, post_description, tag, post_time, upvote, downvote } = post;
+
   return (
-    <Link to="/post/id">
+    <Link to={`/post/${_id}`}>
       <div className="max-w-2xl lg:px-8 px-6 lg:py-4 py-3 border bg-gray-50 rounded-lg">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-light text-gray-600 ">Mar 10, 2019</span>
+          <span className="text-sm font-light text-gray-600 ">{new Date(post_time).toLocaleDateString()}</span>
           <div className="flex gap-2">
             <p className="px-3 py-1 text-sm text-gray-100 transition-colors duration-300 transform bg-secondary rounded">Design</p>
-            <p className="px-3 py-1 text-sm text-gray-100 transition-colors duration-300 transform bg-secondary rounded">Design</p>
+            <p className="px-3 py-1 text-sm text-gray-100 transition-colors duration-300 transform bg-secondary rounded">{tag}</p>
           </div>
         </div>
 
         <div className="mt-2">
-          <h3 className="lg:text-xl text-lg font-bold text-gray-700">Accessibility tools for designers and developers</h3>
-          <p className="mt-2 text-gray-600">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste
-            iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!
-          </p>
+          <h3 className="lg:text-xl text-lg font-bold text-gray-700">{post_title}</h3>
+          <p className="mt-2 text-gray-600">{post_description.slice(0, 200)}...</p>
         </div>
 
         <div className="flex items-center justify-between mt-4">
           <div className="flex items-center">
-            <img
-              className="hidden object-cover w-10 h-10 mr-4 rounded-full sm:block"
-              src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=40&q=80"
-              alt="avatar"
-            />
-            <p className="font-bold text-gray-700">Khatab wedaa</p>
+            <img className="hidden object-cover w-10 h-10 mr-4 rounded-full sm:block" src={author_image} alt="avatar" />
+            <p className="font-bold text-gray-700">{author_name}</p>
           </div>
 
           {/* Comments */}
@@ -42,11 +38,11 @@ const PostCard = () => {
           <div className="flex gap-4 items-center">
             <div className="flex gap-2">
               <AiOutlineLike className="size-5" />
-              <p>5</p>
+              <p>{upvote}</p>
             </div>
             <div className="flex gap-2">
               <AiOutlineDislike className="size-5" />
-              <p>5</p>
+              <p>{downvote}</p>
             </div>
           </div>
         </div>

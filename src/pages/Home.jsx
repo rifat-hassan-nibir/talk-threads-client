@@ -8,7 +8,7 @@ const Home = () => {
     <div>
       <Hero></Hero>
       <div className="bg-slate-50">
-        <div className="container mx-auto grid lg:grid-cols-12 gap-6 lg:py-24 py-16 lg:px-0 px-4">
+        <div className="container mx-auto grid lg:grid-cols-12 lg:gap-8 gap-6 lg:py-24 py-16 lg:px-0 px-4">
           <div className="lg:col-span-3 bg-white lg:p-6 p-4 rounded-lg shadow-lg shadow-gray-100">
             <Announcements></Announcements>
           </div>
