@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 import Gap from "../../Gap";
 import SectionTitle from "../../SectionTitle";
 import PostCard from "./PostCard";
+import axios from "axios";
 
 const AllPosts = () => {
   const [posts, setPosts] = useState([]);
-
   useEffect(() => {
-    fetch("posts.json")
-      .then((res) => res.json())
-      .then((data) => setPosts(data));
+    getPosts();
   }, []);
-  console.log(posts);
+
+  const getPosts = async () => {
+    const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/posts`);
+    setPosts(data);
+  };
 
   return (
     <div className="py-4">
