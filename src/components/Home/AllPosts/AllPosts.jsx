@@ -1,10 +1,11 @@
+import Gap from "../../Gap";
 import SectionTitle from "../../SectionTitle";
 import PostCard from "./PostCard";
 
 const AllPosts = () => {
   return (
-    <div>
-      <div className="flex justify-between items-center">
+    <div className="py-4">
+      <div className="flex justify-between items-start">
         <SectionTitle title={"All Posts"}></SectionTitle>
 
         {/* Filter by popularity */}
@@ -13,7 +14,7 @@ const AllPosts = () => {
         </button>
       </div>
 
-      <div className="my-10"></div>
+      <Gap></Gap>
 
       <div className="flex flex-col gap-5 max-h-[80vh] overflow-auto">
         <PostCard></PostCard>

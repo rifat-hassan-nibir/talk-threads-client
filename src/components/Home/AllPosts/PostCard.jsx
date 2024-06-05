@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const PostCard = () => {
   return (
     <Link to="/post/id">
-      <div className="max-w-2xl px-8 py-4 border bg-gray-50 rounded-lg">
+      <div className="max-w-2xl lg:px-8 px-6 lg:py-4 py-3 border bg-gray-50 rounded-lg">
         <div className="flex items-center justify-between">
           <span className="text-sm font-light text-gray-600 ">Mar 10, 2019</span>
           <div className="flex gap-2">
@@ -15,7 +15,7 @@ const PostCard = () => {
         </div>
 
         <div className="mt-2">
-          <h3 className="text-xl font-bold text-gray-700">Accessibility tools for designers and developers</h3>
+          <h3 className="lg:text-xl text-lg font-bold text-gray-700">Accessibility tools for designers and developers</h3>
           <p className="mt-2 text-gray-600">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste
             iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!
