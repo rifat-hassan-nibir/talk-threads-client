@@ -60,7 +60,7 @@ const Navbar = () => {
             </div>
             <ul tabIndex={0} className="dropdown-content font-semibold z-[1] mt-3 menu shadow bg-base-100 rounded w-52">
               {user && (
-                <li>
+                <li className="disabled">
                   <p>{user?.displayName}</p>
                 </li>
               )}

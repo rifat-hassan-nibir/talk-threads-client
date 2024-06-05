@@ -15,7 +15,7 @@ const AllPosts = () => {
 
       <div className="my-10"></div>
 
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 max-h-[80vh] overflow-auto">
         <PostCard></PostCard>
         <PostCard></PostCard>
         <PostCard></PostCard>

@@ -14,7 +14,7 @@ const Hero = () => {
               <form className="flex flex-col md:flex-row">
                 <input
                   type="text"
-                  placeholder="Search for your favourite topic"
+                  placeholder="Search for posts using tags"
                   className="flex-1 h-10 px-4 py-2 m-1 text-gray-700 placeholder-gray-400 bg-transparent border-none appearance-none :text-gray-200 focus:outline-none focus:placeholder-transparent"
                 />
 

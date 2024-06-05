@@ -2,7 +2,7 @@ import SectionTitle from "../SectionTitle";
 
 const AllTags = () => {
   return (
-    <div>
+    <div className="max-h-[80vh] overflow-auto">
       <SectionTitle title={"All Tags"}></SectionTitle>
     </div>
   );
