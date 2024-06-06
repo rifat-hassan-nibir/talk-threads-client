@@ -17,8 +17,7 @@ const tags = [
 
 const AllTags = () => {
   return (
-    <div className="py-4">
-      <SectionTitle title={"All Tags"}></SectionTitle>
+    <div>
       <div className="max-h-[80vh] overflow-auto">
         <Gap></Gap>
 
