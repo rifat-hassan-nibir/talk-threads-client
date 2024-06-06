@@ -39,11 +39,12 @@ const Sidebar = () => {
       >
         <div>
           <div>
-            <div className="w-full hidden md:flex px-4 py-2 rounded justify-center items-center bg-white text-primary font-bold mx-auto">
-              <Link to="/">
-                <p>Talk Threads</p>
-              </Link>
-            </div>
+            <Link
+              to="/"
+              className="w-full hidden md:flex px-4 py-2 rounded justify-center items-center bg-white text-primary font-bold mx-auto"
+            >
+              <p>Talk Threads</p>
+            </Link>
           </div>
 
           {/* Nav Items */}

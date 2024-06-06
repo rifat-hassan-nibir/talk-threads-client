@@ -21,8 +21,8 @@ const AddPost = () => {
   };
   return (
     <div>
-      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <div className="max-w-3xl mx-auto border bg-white lg:p-10 p-5 rounded-lg shadow-lg shadow-gray-100">
+      <div className="flex justify-center items-center px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <div className="w-full mx-auto border bg-white lg:p-10 p-5 rounded-lg shadow-lg shadow-gray-100">
           <div className="text-center">
             <h1 className="text-2xl font-semibold text-gray-800 sm:text-3xl dark:text-white">Add Post</h1>
           </div>
@@ -30,7 +30,7 @@ const AddPost = () => {
           <div className="mt-8">
             {/* Form */}
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="spacey-y-4 lg:space-y-6">
+              <div className="space-y-4 lg:space-y-6">
                 <div>
                   <label htmlFor="post-title" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
                     Post Title
@@ -132,7 +132,7 @@ const AddPost = () => {
                   type="submit"
                   className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white hover:bg-secondary hover:text-white hover:transition-all disabled:opacity-50 disabled:pointer-events-none"
                 >
-                  Add Food
+                  Add Post
                 </button>
               </div>
             </form>
