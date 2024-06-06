@@ -5,6 +5,7 @@ import PostCard from "./PostCard";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../LoadingSpinner";
+import ErrorMessage from "../../ErrorMessage";
 
 const AllPosts = () => {
   const {
@@ -21,6 +22,7 @@ const AllPosts = () => {
   });
 
   if (isPending) return <LoadingSpinner />;
+  if (isError && error) return <ErrorMessage error={error} />;
 
   return (
     <div>
