@@ -9,6 +9,7 @@ import MyPosts from "../components/Dashboard/Common/MyPosts";
 import JoinUs from "../pages/Authentication/JoinUs";
 import Register from "../pages/Authentication/Register";
 import PrivateRoute from "./PrivateRoute";
+import SinglePost from "../pages/SinglePost";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/membership",
         element: <Membership></Membership>,
+      },
+      {
+        path: "/post/:id",
+        element: <SinglePost></SinglePost>,
       },
     ],
   },

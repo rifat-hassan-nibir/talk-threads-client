@@ -1,5 +1,4 @@
 import Gap from "../Gap";
-import SectionTitle from "../SectionTitle";
 import Tag from "../Tag";
 
 const tags = [

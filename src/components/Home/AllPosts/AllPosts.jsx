@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import Gap from "../../Gap";
-import SectionTitle from "../../SectionTitle";
 import PostCard from "./PostCard";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
