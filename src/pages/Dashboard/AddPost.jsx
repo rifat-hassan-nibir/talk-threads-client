@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -13,12 +13,23 @@ const AddPost = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+    // set default value for upvote and downvote
+    setValue("upvote", 0);
+    setValue("downvote", 0);
+    setValue("date", currentDate);
+  }, [setValue, currentDate]);
+
   const onSubmit = (data) => {
-    console.log(data, currentDate);
+    const authorInfo = { email: user.email, name: user.displayName, photo: user.photoURL };
+    const addedPost = { ...data, authorInfo };
+    console.log(addedPost);
   };
+
   return (
     <div>
       <div className="flex justify-center items-center px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -58,7 +69,8 @@ const AddPost = () => {
                 </div>
 
                 {/* Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 lg:gap-6">
+                  {/* Tags */}
                   <div>
                     <label htmlFor="tag" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
                       Tag
@@ -77,6 +89,7 @@ const AddPost = () => {
                     {errors.tag && <span className="text-red-500">This field is required</span>}
                   </div>
 
+                  {/* Post Date */}
                   <div>
                     <label htmlFor="post-date" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
                       Post Date
@@ -87,6 +100,36 @@ const AddPost = () => {
                       defaultValue={currentDate}
                       disabled
                       className="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    />
+                  </div>
+
+                  {/* Upvote */}
+                  <div>
+                    <label htmlFor="upvote" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                      Upvote
+                    </label>
+                    <input
+                      type="text"
+                      id="upvote"
+                      defaultValue={0}
+                      disabled
+                      className="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                      {...register("upvote")}
+                    />
+                  </div>
+
+                  {/* Downvote */}
+                  <div>
+                    <label htmlFor="downvote" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                      Down Vote
+                    </label>
+                    <input
+                      type="text"
+                      id="downvote"
+                      defaultValue={0}
+                      disabled
+                      className="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                      {...register("downvote")}
                     />
                   </div>
                 </div>
