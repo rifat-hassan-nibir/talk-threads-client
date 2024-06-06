@@ -1,7 +1,7 @@
 import Gap from "../Gap";
 import Tag from "../Tag";
 
-const tags = [
+export const tags = [
   "General",
   "Art & Design",
   "Sports",

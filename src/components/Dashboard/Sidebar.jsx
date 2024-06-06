@@ -5,7 +5,7 @@ import { FaUserPen } from "react-icons/fa6";
 import { FaPen } from "react-icons/fa";
 import { AiFillProfile } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import MenuItem from "./MenuItem";
+import MenuItem from "./Common/MenuItem";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);

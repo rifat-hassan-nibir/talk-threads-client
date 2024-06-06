@@ -1,0 +1,147 @@
+import { useContext } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
+import { tags } from "../../components/Home/AllTags";
+
+const AddPost = () => {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const currentDate = new Date().toLocaleDateString();
+
+  // Get the data from form using React Hook Form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data, currentDate);
+  };
+  return (
+    <div>
+      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <div className="max-w-3xl mx-auto border bg-white lg:p-10 p-5 rounded-lg shadow-lg shadow-gray-100">
+          <div className="text-center">
+            <h1 className="text-2xl font-semibold text-gray-800 sm:text-3xl dark:text-white">Add Post</h1>
+          </div>
+
+          <div className="mt-8">
+            {/* Form */}
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="spacey-y-4 lg:space-y-6">
+                <div>
+                  <label htmlFor="post-title" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                    Post Title
+                  </label>
+                  <input
+                    type="text"
+                    id="post-title"
+                    className="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    {...register("post_title", { required: true })}
+                  />
+                  {errors.post_title && <span className="text-red-500">This field is required</span>}
+                </div>
+
+                <div>
+                  <label htmlFor="post-description" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                    Post Description
+                  </label>
+                  <textarea
+                    id="post-description"
+                    rows="4"
+                    className="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    {...register("post_description", { required: true })}
+                  ></textarea>
+                  {errors.post_description && <span className="text-red-500">This field is required</span>}
+                </div>
+
+                {/* Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
+                  <div>
+                    <label htmlFor="tag" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                      Tag
+                    </label>
+                    <select
+                      id="tag"
+                      className="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                      {...register("tag", { required: true })}
+                    >
+                      {tags.map((tag, index) => (
+                        <option value={tag} key={index}>
+                          {tag}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.tag && <span className="text-red-500">This field is required</span>}
+                  </div>
+
+                  <div>
+                    <label htmlFor="post-date" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                      Post Date
+                    </label>
+                    <input
+                      type="text"
+                      id="post-date"
+                      defaultValue={currentDate}
+                      disabled
+                      className="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    />
+                  </div>
+                </div>
+                {/* End Grid  */}
+
+                {/* Author's Information */}
+                <div>
+                  <label htmlFor="donator-information" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                    Author&apos;s Information:
+                  </label>
+                  <div className="grid grid-cols-5 gap-4 lg:gap-6 items-center">
+                    <div className="col-span-1">
+                      <img className="inline-block size-[62px] rounded-full" src={user.photoURL} alt="Donator Image" />
+                    </div>
+                    <div className="col-span-5 lg:col-span-2">
+                      <input
+                        type="text"
+                        name="authorName"
+                        id="author-name"
+                        defaultValue={user.displayName}
+                        disabled
+                        className=" py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                      />
+                    </div>
+                    <div className="col-span-5 lg:col-span-2">
+                      <input
+                        type="email"
+                        name="authorEmail"
+                        id="author-email"
+                        defaultValue={user.email}
+                        disabled
+                        className=" py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* End Grid */}
+
+              {/* Submit Button */}
+              <div className="mt-6 grid">
+                <button
+                  type="submit"
+                  className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white hover:bg-secondary hover:text-white hover:transition-all disabled:opacity-50 disabled:pointer-events-none"
+                >
+                  Add Food
+                </button>
+              </div>
+            </form>
+            {/* End Form  */}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AddPost;
