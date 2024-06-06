@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { ScrollRestoration, useParams } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
 import Tag from "../components/Tag";
@@ -15,7 +15,7 @@ const SinglePost = () => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["posts"],
+    queryKey: ["post"],
     queryFn: async () => {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/post/${id}`);
       return data;
@@ -24,11 +24,13 @@ const SinglePost = () => {
 
   if (isPending) return <LoadingSpinner />;
   if (isError && error) return <ErrorMessage error={error} />;
-  console.log(post);
+
   const { _id, author_image, author_name, post_title, post_description, post_time, tag, upvote, downvote } = post;
 
   return (
     <div>
+      <ScrollRestoration />
+
       {/* Blog Article  */}
       <div className="max-w-3xl px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
         <div className="max-w-2xl">
@@ -65,44 +67,6 @@ const SinglePost = () => {
                             </p>
                           </div>
                           {/* End Body  */}
-
-                          {/* Footer  */}
-                          <div className="flex justify-between items-center px-4 py-3 sm:px-5">
-                            <ul className="text-xs space-x-3">
-                              <li className="inline-block">
-                                <span className="font-semibold text-gray-200 dark:text-neutral-200">56</span>
-                                <span className="text-gray-400 dark:text-neutral-400">articles</span>
-                              </li>
-                              <li className="inline-block">
-                                <span className="font-semibold text-gray-200 dark:text-neutral-200">1k+</span>
-                                <span className="text-gray-400 dark:text-neutral-400">followers</span>
-                              </li>
-                            </ul>
-
-                            <div>
-                              <button
-                                type="button"
-                                className="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                              >
-                                <svg
-                                  className="flex-shrink-0 size-3.5"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="16"
-                                  height="16"
-                                  fill="currentColor"
-                                  viewBox="0 0 16 16"
-                                >
-                                  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
-                                  />
-                                </svg>
-                                Follow
-                              </button>
-                            </div>
-                          </div>
-                          {/* End Footer  */}
                         </div>
                         {/* End Dropdown Card  */}
                       </div>
@@ -139,7 +103,6 @@ const SinglePost = () => {
         </div>
       </div>
       {/* End Blog Article  */}
-
       {/* Sticky Share Group  */}
       <div className="sticky bottom-6 inset-x-0 text-center">
         <div className="inline-block bg-white shadow-md rounded-full py-3 px-4 dark:bg-neutral-800">
