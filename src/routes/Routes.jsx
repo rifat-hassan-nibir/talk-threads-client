@@ -10,31 +10,38 @@ import JoinUs from "../pages/Authentication/JoinUs";
 import Register from "../pages/Authentication/Register";
 import PrivateRoute from "./PrivateRoute";
 import SinglePost from "../pages/SinglePost";
+import Test from "../pages/Test";
+import Error404 from "../pages/Error404";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout></MainLayout>,
+    element: <MainLayout />,
+    errorElement: <Error404 />,
     children: [
       {
         index: true,
-        element: <Home></Home>,
+        element: <Home />,
       },
       {
         path: "/join-us",
-        element: <JoinUs></JoinUs>,
+        element: <JoinUs />,
       },
       {
         path: "/register",
-        element: <Register></Register>,
+        element: <Register />,
       },
       {
         path: "/membership",
-        element: <Membership></Membership>,
+        element: <Membership />,
       },
       {
         path: "/post/:id",
-        element: <SinglePost></SinglePost>,
+        element: <SinglePost />,
+      },
+      {
+        path: "/test",
+        element: <Test />,
       },
     ],
   },
@@ -42,21 +49,21 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <DashboardLayout></DashboardLayout>
+        <DashboardLayout />
       </PrivateRoute>
     ),
     children: [
       {
         index: true,
-        element: <MyProfile></MyProfile>,
+        element: <MyProfile />,
       },
       {
         path: "add-post",
-        element: <AddPost></AddPost>,
+        element: <AddPost />,
       },
       {
         path: "my-posts",
-        element: <MyPosts></MyPosts>,
+        element: <MyPosts />,
       },
     ],
   },
