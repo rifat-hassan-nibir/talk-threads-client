@@ -1,15 +1,17 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { tags } from "../../components/Home/AllTags";
 import toast from "react-hot-toast";
 import axios from "axios";
+import ButtonSpinner from "../../components/ButtonSpinner";
 
 const AddPost = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const currentDate = new Date().toLocaleDateString();
+  const [disabled, setDisabled] = useState(false);
 
   // Get the data from form using React Hook Form
   const {
@@ -29,8 +31,9 @@ const AddPost = () => {
   const onSubmit = async (data) => {
     const authorInfo = { email: user.email, name: user.displayName, photo: user.photoURL };
     const addedPost = { ...data, authorInfo };
-    console.log(addedPost);
 
+    // Disabled true for showing spinner in add post button
+    setDisabled(true);
     try {
       const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/add-post`, addedPost);
       if (data.insertedId) {
@@ -173,7 +176,7 @@ const AddPost = () => {
                         id="author-email"
                         defaultValue={user.email}
                         disabled
-                        className=" py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                        className="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                       />
                     </div>
                   </div>
@@ -185,9 +188,10 @@ const AddPost = () => {
               <div className="mt-6 grid">
                 <button
                   type="submit"
-                  className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white hover:bg-secondary hover:text-white hover:transition-all disabled:opacity-50 disabled:pointer-events-none"
+                  disabled={disabled}
+                  className="disabled:cursor-not-allowed w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white hover:bg-secondary hover:text-white hover:transition-all disabled:opacity-50 disabled:pointer-events-none"
                 >
-                  Add Post
+                  {disabled ? <ButtonSpinner /> : "Add Post"}
                 </button>
               </div>
             </form>
