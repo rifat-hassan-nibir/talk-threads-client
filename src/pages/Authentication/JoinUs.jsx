@@ -7,7 +7,7 @@ import { IoIosEyeOff } from "react-icons/io";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const JoinUs = () => {
-  const { loginUser, signInWithGoogle } = useContext(AuthContext);
+  const { signIn, signInWithGoogle } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const JoinUs = () => {
     const { email, password } = data;
 
     // Login User
-    loginUser(email, password)
+    signIn(email, password)
       .then(() => {
         toast.success("Logged in successfuly");
         navigate("/");

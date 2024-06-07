@@ -4,13 +4,13 @@ import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const PostCard = ({ post }) => {
-  const { _id, author_image, author_name, post_title, post_description, tag, post_time, upvote, downvote } = post;
+  const { _id, author_image, author_name, post_title, post_description, tag, date, upvote, downvote } = post;
 
   return (
     <Link to={`/post/${_id}`}>
       <div className="max-w-2xl lg:px-8 px-6 lg:py-4 py-3 border bg-gray-50 rounded-lg">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-light text-gray-600 ">{new Date(post_time).toLocaleDateString()}</span>
+          <span className="text-sm font-light text-gray-600 ">{new Date(date).toLocaleDateString()}</span>
           <div className="flex gap-2">
             <p className="px-3 py-1 text-sm text-gray-100 transition-colors duration-300 transform bg-secondary rounded">Design</p>
             <p className="px-3 py-1 text-sm text-gray-100 transition-colors duration-300 transform bg-secondary rounded">{tag}</p>

@@ -10,7 +10,7 @@ import ButtonSpinner from "../../components/ButtonSpinner";
 const AddPost = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const currentDate = new Date().toLocaleDateString();
+  const currentDate = new Date();
   const [disabled, setDisabled] = useState(false);
 
   // Get the data from form using React Hook Form
@@ -26,7 +26,7 @@ const AddPost = () => {
     setValue("upvote", 0);
     setValue("downvote", 0);
     setValue("date", currentDate);
-  }, [setValue, currentDate]);
+  }, []);
 
   const onSubmit = async (data) => {
     const authorInfo = { email: user.email, name: user.displayName, photo: user.photoURL };
@@ -47,7 +47,7 @@ const AddPost = () => {
 
   return (
     <div>
-      <div className="flex justify-center items-center px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+      <div className="flex justify-center items-center max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div className="w-full mx-auto border bg-white lg:p-10 p-5 rounded-lg shadow-lg shadow-gray-100">
           <div className="text-center">
             <h1 className="text-2xl font-semibold text-gray-800 sm:text-3xl dark:text-white">Add Post</h1>
@@ -112,7 +112,7 @@ const AddPost = () => {
                     <input
                       type="text"
                       id="post-date"
-                      defaultValue={currentDate}
+                      defaultValue={currentDate.toLocaleDateString()}
                       disabled
                       className="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     />
