@@ -2,14 +2,16 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { updateProfile } from "firebase/auth";
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 import { AuthContext } from "../../providers/AuthProvider";
+import axios from "axios";
+import ButtonSpinner from "../../components/ButtonSpinner";
 
 const Register = () => {
-  const { createUser, signInWithGoogle } = useContext(AuthContext);
+  const { createUser, signInWithGoogle, updateUserProfile } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
 
   const {
@@ -18,8 +20,12 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    const { name, email, photoURL, password } = data;
+  const onSubmit = async (data) => {
+    setDisabled(true);
+    const { name, email, photo, password } = data;
+    const imageFile = photo[0];
+    const formData = new FormData();
+    formData.append("image", imageFile);
 
     // Password validation
     if (password.length < 6) {
@@ -32,20 +38,25 @@ const Register = () => {
       return toast.error("Password should contain at least one lowercase character");
     }
 
-    // Create User with email and password
-    createUser(email, password)
-      .then((result) => {
-        updateProfile(result.user, {
-          displayName: name,
-          photoURL: photoURL,
-        }).then(() => {
-          toast.success("Account created successfuly");
-          navigate("/");
-        });
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+    try {
+      // uplaod image
+      const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`, formData);
+
+      // Get the photo url
+      const photoURL = data.data.display_url;
+
+      // Create user
+      const result = await createUser(email, password);
+      console.log(result.user);
+
+      // update name and photo
+      await updateUserProfile(name, photoURL);
+
+      toast.success("Signup successfull");
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   // Google Sign Up
@@ -151,18 +162,19 @@ const Register = () => {
 
                 {/* Photo URL Form Group */}
                 <div>
-                  <label htmlFor="Name" className="block text-sm mb-2 dark:text-white">
-                    Photo URL
+                  <label htmlFor="photo" className="block text-sm mb-2 dark:text-white">
+                    Select Profile Picture
                   </label>
                   <div className="relative">
                     <input
-                      type="text"
-                      id="photoURL"
-                      name="photoURL"
-                      className="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      {...register("photoURL", { required: true })}
+                      type="file"
+                      id="photo"
+                      name="photo"
+                      accept="image/*"
+                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                      {...register("photo", { required: true })}
                     />
-                    {errors.photoURL && <span className="text-red-600">This field is required</span>}
+                    {errors.photo && <span className="text-red-600">This field is required</span>}
                   </div>
                 </div>
                 {/* End of Photo URL Form Group */}
@@ -190,9 +202,10 @@ const Register = () => {
 
                 <button
                   type="submit"
+                  disabled={disabled}
                   className="w-full mt-2 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent transition-all bg-primary text-white hover:bg-secondary hover:text-white disabled:opacity-50 disabled:pointer-events-none"
                 >
-                  Sign up
+                  {disabled ? <ButtonSpinner /> : "Register"}
                 </button>
               </div>
             </form>

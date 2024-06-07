@@ -29,8 +29,8 @@ const MyProfile = () => {
   return (
     <div>
       <UserInfo></UserInfo>
-      {myPosts.slice(0, 3).map((post) => (
-        <PostCard post={post}></PostCard>
+      {myPosts.slice(0, 3).map((post, index) => (
+        <PostCard post={post} key={index}></PostCard>
       ))}
     </div>
   );
