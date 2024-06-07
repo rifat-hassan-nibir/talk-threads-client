@@ -5,10 +5,12 @@ import toast from "react-hot-toast";
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 import { AuthContext } from "../../providers/AuthProvider";
+import ButtonSpinner from "../../components/ButtonSpinner";
 
 const JoinUs = () => {
   const { signIn, signInWithGoogle } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   const navigate = useNavigate();
 
@@ -19,6 +21,8 @@ const JoinUs = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    // show button spinner
+    setDisabled(true);
     const { email, password } = data;
 
     // Login User
@@ -139,9 +143,10 @@ const JoinUs = () => {
 
                 <button
                   type="submit"
+                  disabled={disabled}
                   className="w-full mt-2 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent transition-all bg-primary text-white hover:bg-secondary hover:text-white disabled:opacity-50 disabled:pointer-events-none"
                 >
-                  Sign in
+                  {disabled ? <ButtonSpinner /> : "Sign In"}
                 </button>
               </div>
             </form>

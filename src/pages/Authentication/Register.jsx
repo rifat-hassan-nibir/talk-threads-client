@@ -21,6 +21,7 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
+    // show button spinner
     setDisabled(true);
     const { name, email, photo, password } = data;
     const imageFile = photo[0];

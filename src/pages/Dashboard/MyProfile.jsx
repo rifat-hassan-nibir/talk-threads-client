@@ -7,6 +7,8 @@ import axios from "axios";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import ErrorMessage from "../../components/ErrorMessage";
 import PostCard from "../../components/Home/AllPosts/PostCard";
+import SectionTitle from "../../components/SectionTitle";
+import Gap from "../../components/Gap";
 
 const MyProfile = () => {
   const { user } = useContext(AuthContext);
@@ -17,7 +19,7 @@ const MyProfile = () => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["my-posts"],
+    queryKey: ["my-posts", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/my-posts/${user?.email}?dateSort=descending`);
       return data;
@@ -29,9 +31,14 @@ const MyProfile = () => {
   return (
     <div>
       <UserInfo></UserInfo>
-      {myPosts.slice(0, 3).map((post, index) => (
-        <PostCard post={post} key={index}></PostCard>
-      ))}
+      <Gap bigGap></Gap>
+      <SectionTitle title={"Recent 3 Posts"}></SectionTitle>
+      <Gap></Gap>
+      <div className="grid lg:grid-cols-3 grid-cols-1 gap-5">
+        {myPosts.slice(0, 3).map((post, index) => (
+          <PostCard post={post} key={index}></PostCard>
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 const AnnouncementCard = () => {
   return (
-    <div>
-      <div className="lg:px-8 px-6 lg:py-4 py-3 border bg-gray-50 rounded-lg">
+    <div className="shadow-lg shadow-gray-100">
+      <div className="lg:px-8 px-6 lg:py-4 py-3 border bg-gray-50 rounded-lg ">
         <div className="mt-2">
           <h3 className="lg:text-xl text-lg font-bold text-gray-700">Accessibility tools for designers and developers</h3>
           <p className="mt-2 text-gray-600">

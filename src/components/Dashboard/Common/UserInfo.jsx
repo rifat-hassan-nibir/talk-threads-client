@@ -1,7 +1,7 @@
 const UserInfo = () => {
   return (
     <div>
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center lg:mt-10 mt-6">
         <div className="relative flex flex-col justify-center w-[400px] p-6 shadow-lg rounded-xl sm:px-12 bg-primary text-white">
           <img
             src="https://source.unsplash.com/150x150/?portrait?3"

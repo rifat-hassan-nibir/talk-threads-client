@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +33,7 @@ const AddPost = () => {
     const authorInfo = { email: user.email, name: user.displayName, photo: user.photoURL };
     const addedPost = { ...data, authorInfo };
 
-    // Disabled true for showing spinner in add post button
+    // show button spinner
     setDisabled(true);
     try {
       const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/add-post`, addedPost);
