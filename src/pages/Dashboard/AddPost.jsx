@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { tags } from "../../components/Home/AllTags";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const AddPost = () => {
   const { user } = useContext(AuthContext);
@@ -24,10 +26,20 @@ const AddPost = () => {
     setValue("date", currentDate);
   }, [setValue, currentDate]);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const authorInfo = { email: user.email, name: user.displayName, photo: user.photoURL };
     const addedPost = { ...data, authorInfo };
     console.log(addedPost);
+
+    try {
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/add-post`, addedPost);
+      if (data.insertedId) {
+        navigate("/dashboard/my-posts");
+        toast.success("Post added successfully");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -69,7 +81,7 @@ const AddPost = () => {
                 </div>
 
                 {/* Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 lg:gap-6">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
                   {/* Tags */}
                   <div>
                     <label htmlFor="tag" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
