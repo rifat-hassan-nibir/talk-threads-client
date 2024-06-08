@@ -12,7 +12,6 @@ const PostCard = ({ post }) => {
         <div className="flex items-center justify-between ">
           <span className="text-sm font-light text-gray-600 ">{new Date(date).toLocaleDateString()}</span>
           <div className="flex gap-2">
-            <p className="px-3 py-1 text-sm text-gray-100 transition-colors duration-300 transform bg-secondary rounded">Design</p>
             <p className="px-3 py-1 text-sm text-gray-100 transition-colors duration-300 transform bg-secondary rounded">{tag}</p>
           </div>
         </div>

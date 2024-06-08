@@ -3,13 +3,14 @@ import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
-import { tags } from "../../../components/Home/AllTags";
 import toast from "react-hot-toast";
 import axios from "axios";
 import ButtonSpinner from "../../../components/Common/ButtonSpinner";
+import useTags from "../../../hooks/useTags";
 
 const AddPost = () => {
   const { user } = useContext(AuthContext);
+  const [tags] = useTags();
   const navigate = useNavigate();
   const currentDate = new Date();
   const [disabled, setDisabled] = useState(false);
@@ -96,9 +97,9 @@ const AddPost = () => {
                       className="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                       {...register("tag", { required: true })}
                     >
-                      {tags.map((tag, index) => (
-                        <option value={tag} key={index}>
-                          {tag}
+                      {tags?.map((tag) => (
+                        <option value={tag.tag} key={tag._id}>
+                          {tag.tag}
                         </option>
                       ))}
                     </select>

@@ -1,20 +1,10 @@
+import useTags from "../../hooks/useTags";
 import Gap from "../Common/Gap";
 import Tag from "../Common/Tag";
 
-export const tags = [
-  "General",
-  "Art & Design",
-  "Sports",
-  "Travel",
-  "Books & Literature",
-  "Technology",
-  "Gadgets",
-  "Programming",
-  "Software",
-  "AI & Machine Learning",
-];
-
 const AllTags = () => {
+  const [tags] = useTags();
+  console.log(tags);
   return (
     <div>
       <div className="max-h-[80vh] overflow-auto">
@@ -22,7 +12,7 @@ const AllTags = () => {
 
         <div className="flex flex-wrap gap-3">
           {tags.map((tag) => (
-            <Tag tagName={tag} key={tag._id}></Tag>
+            <Tag tagName={tag.tag} key={tag._id}></Tag>
           ))}
         </div>
       </div>

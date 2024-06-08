@@ -2,6 +2,7 @@ import { AiFillProfile } from "react-icons/ai";
 import MenuItem from "../MenuItem";
 import { FaUsers } from "react-icons/fa";
 import { GoReport } from "react-icons/go";
+import { GrAnnounce } from "react-icons/gr";
 
 const AdminMenu = () => {
   return (
@@ -14,6 +15,9 @@ const AdminMenu = () => {
 
       {/* Reported Comments */}
       <MenuItem label={"Reported Comments"} to={"reported-comments"} icon={GoReport} end></MenuItem>
+
+      {/* Make Annoucement */}
+      <MenuItem label={"Make Annoucement"} to={"make-annoucement"} icon={GrAnnounce} end></MenuItem>
     </div>
   );
 };
