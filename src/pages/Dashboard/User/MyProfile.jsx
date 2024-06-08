@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
 import { useContext } from "react";
-import UserInfo from "../../components/Dashboard/Common/UserInfo";
-import { AuthContext } from "../../providers/AuthProvider";
+import { AuthContext } from "../../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import LoadingSpinner from "../../components/LoadingSpinner";
-import ErrorMessage from "../../components/ErrorMessage";
-import PostCard from "../../components/Home/AllPosts/PostCard";
-import SectionTitle from "../../components/SectionTitle";
-import Gap from "../../components/Gap";
+import LoadingSpinner from "../../../components/LoadingSpinner";
+import ErrorMessage from "../../../components/ErrorMessage";
+import PostCard from "../../../components/Home/AllPosts/PostCard";
+import SectionTitle from "../../../components/SectionTitle";
+import Gap from "../../../components/Gap";
+import UserInfo from "../../../components/Dashboard/User/UserInfo";
 
 const MyProfile = () => {
   const { user } = useContext(AuthContext);

@@ -2,11 +2,11 @@
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProvider";
-import { tags } from "../../components/Home/AllTags";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { tags } from "../../../components/Home/AllTags";
 import toast from "react-hot-toast";
 import axios from "axios";
-import ButtonSpinner from "../../components/ButtonSpinner";
+import ButtonSpinner from "../../../components/ButtonSpinner";
 
 const AddPost = () => {
   const { user } = useContext(AuthContext);

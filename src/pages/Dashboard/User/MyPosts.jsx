@@ -1,10 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext } from "react";
-import LoadingSpinner from "../../components/LoadingSpinner";
-import ErrorMessage from "../../components/ErrorMessage";
-import { AuthContext } from "../../providers/AuthProvider";
-import MyPostsRow from "../../components/TableRows/Common/MyPostsRow";
+import LoadingSpinner from "../../../components/LoadingSpinner";
+import ErrorMessage from "../../../components/ErrorMessage";
+import { AuthContext } from "../../../providers/AuthProvider";
+import MyPostsRow from "../../../components/TableRows/Common/MyPostsRow";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 

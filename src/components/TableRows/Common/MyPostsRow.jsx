@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { FaTrashAlt } from "react-icons/fa";
 const MyPostsRow = ({ post, handleDelete }) => {
   const { _id, post_title, upvote, downvote } = post;
   return (
@@ -48,7 +49,7 @@ const MyPostsRow = ({ post, handleDelete }) => {
               onClick={() => handleDelete(_id)}
               className="py-2 px-5 hover:cursor-pointer inline-flex items-center gap-x-1 text-sm font-medium bg-red-500 hover:bg-red-400 transition-all text-white rounded-md"
             >
-              Delete
+              <FaTrashAlt />
             </button>
           </div>
         </td>
