@@ -8,9 +8,11 @@ import Register from "../pages/Authentication/Register";
 import PrivateRoute from "./PrivateRoute";
 import SinglePost from "../pages/SinglePost";
 import Error404 from "../pages/Error404";
-import MyProfile from "../pages/Dashboard/User/MyProfile";
 import AddPost from "../pages/Dashboard/User/AddPost";
 import MyPosts from "../pages/Dashboard/User/MyPosts";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
+import ReportedComments from "../pages/Dashboard/Admin/ReportedComments";
+import MyProfile from "../pages/Dashboard/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +61,14 @@ const router = createBrowserRouter([
       {
         path: "my-posts",
         element: <MyPosts />,
+      },
+      {
+        path: "manage-users",
+        element: <ManageUsers />,
+      },
+      {
+        path: "reported-comments",
+        element: <ReportedComments />,
       },
     ],
   },

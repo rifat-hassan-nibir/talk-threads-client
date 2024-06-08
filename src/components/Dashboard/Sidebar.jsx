@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { GrLogout } from "react-icons/gr";
 import { AiOutlineBars } from "react-icons/ai";
-import { FaUserPen } from "react-icons/fa6";
-import { FaPen } from "react-icons/fa";
-import { AiFillProfile } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import MenuItem from "./User/MenuItem";
+import useRole from "../../hooks/useRole";
+import UserMenu from "./Menus/UserMenu";
+import AdminMenu from "./Menus/AdminMenu";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
+  const { role } = useRole();
+  console.log(role);
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -50,13 +51,8 @@ const Sidebar = () => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
-              {/* My Profile */}
-              <MenuItem label={"My Profile"} to={""} icon={AiFillProfile} end></MenuItem>
-
-              {/* Add Posts */}
-              <MenuItem label={"Add Post"} to={"add-post"} icon={FaPen}></MenuItem>
-              {/* My Posts */}
-              <MenuItem label={"My Posts"} to={"my-posts"} icon={FaUserPen}></MenuItem>
+              {role === "user" && <UserMenu></UserMenu>}
+              {role === "admin" && <AdminMenu></AdminMenu>}
             </nav>
           </div>
         </div>
