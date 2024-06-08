@@ -7,7 +7,7 @@ const AllTags = () => {
   console.log(tags);
   return (
     <div>
-      <div className="max-h-[80vh] overflow-auto">
+      <div className="max-h-[75vh] overflow-auto">
         <Gap></Gap>
 
         <div className="flex flex-wrap gap-3">
