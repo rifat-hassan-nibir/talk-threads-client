@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-const MyPostsRow = ({ post_title, upvote, downvote }) => {
+const MyPostsRow = ({ post, handleDelete }) => {
+  const { _id, post_title, upvote, downvote } = post;
   return (
     <>
       <tr>
@@ -43,9 +44,12 @@ const MyPostsRow = ({ post_title, upvote, downvote }) => {
         {/* Action */}
         <td className="size-px whitespace-nowrap">
           <div className="px-6 py-3">
-            <span className="py-2 px-5 hover:cursor-pointer inline-flex items-center gap-x-1 text-sm font-medium bg-red-500 hover:bg-red-400 transition-all text-white rounded-md">
+            <button
+              onClick={() => handleDelete(_id)}
+              className="py-2 px-5 hover:cursor-pointer inline-flex items-center gap-x-1 text-sm font-medium bg-red-500 hover:bg-red-400 transition-all text-white rounded-md"
+            >
               Delete
-            </span>
+            </button>
           </div>
         </td>
       </tr>

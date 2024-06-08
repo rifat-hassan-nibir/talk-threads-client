@@ -1,19 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext } from "react";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import ErrorMessage from "../../components/ErrorMessage";
 import { AuthContext } from "../../providers/AuthProvider";
 import MyPostsRow from "../../components/TableRows/Common/MyPostsRow";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const MyPosts = () => {
   const { user } = useContext(AuthContext);
 
+  // Get all posts of a user using email
   const {
     data: myPosts = [],
     isPending,
     isError,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["my-posts"],
     queryFn: async () => {
@@ -21,6 +25,45 @@ const MyPosts = () => {
       return data;
     },
   });
+
+  // Delete post function usign tanstack query
+  const { mutateAsync } = useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/delete-post/${id}`);
+      return data;
+    },
+    onSuccess: (data) => {
+      if (data.deletedCount > 0) {
+        refetch();
+      }
+    },
+  });
+
+  // Delete post function
+  const handleDelete = async (id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#2c4263",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+          await mutateAsync(id);
+        }
+      });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   if (isPending) return <LoadingSpinner />;
   if (isError && error) return <ErrorMessage error={error} />;
@@ -91,13 +134,7 @@ const MyPosts = () => {
 
                   <tbody className="divide-y divide-gray-200 dark:divide-neutral-700">
                     {myPosts.map((post) => (
-                      <MyPostsRow
-                        post_title={post.post_title}
-                        post_description={post.post_description}
-                        upvote={post.upvote}
-                        downvote={post.downvote}
-                        key={post._id}
-                      />
+                      <MyPostsRow handleDelete={handleDelete} post={post} key={post._id} />
                     ))}
                   </tbody>
                 </table>
