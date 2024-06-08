@@ -57,11 +57,15 @@ const Register = () => {
       navigate("/");
     } catch (error) {
       toast.error(error.message);
+      // hide button spinner
+      setDisabled(false);
     }
   };
 
   // Google Sign Up
   const handleGoogleSignUp = () => {
+    // show button spinner
+    setDisabled(true);
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
@@ -70,6 +74,8 @@ const Register = () => {
       })
       .catch((error) => {
         toast.error(error.message);
+        // hide button spinner
+        setDisabled(false);
       });
   };
 
@@ -128,7 +134,7 @@ const Register = () => {
                 {/* Name Form Group */}
                 <div>
                   <label htmlFor="Name" className="block text-sm mb-2 dark:text-white">
-                    Name
+                    Username
                   </label>
                   <div className="relative">
                     <input

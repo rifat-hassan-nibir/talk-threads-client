@@ -23,26 +23,31 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // create user with email and password
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+  // sign in with email and password
   const signIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  // sign in with google
   const signInWithGoogle = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
+  // reset password
   const resetPassword = (email) => {
     setLoading(true);
     return sendPasswordResetEmail(auth, email);
   };
 
+  // logout user
   const logOut = async () => {
     setLoading(true);
     // await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
@@ -51,11 +56,25 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  // update user profile
   const updateUserProfile = (name, photo) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
     });
+  };
+
+  // save user data in db
+  const saveUserInfo = async (user) => {
+    const userInfo = {
+      userName: user?.displayName,
+      email: user?.email,
+      role: "user",
+      premiumUser: false,
+    };
+
+    const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/user`, userInfo);
+    return data;
   };
 
   // // Get token from server
@@ -82,14 +101,14 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         // getToken(currentUser.email);
-        // saveUser(currentUser);
+        saveUserInfo(currentUser);
       }
       setLoading(false);
     });
     return () => {
       return unsubscribe();
     };
-  }, []);
+  }, [user]);
 
   const authInfo = {
     user,

@@ -20,32 +20,37 @@ const JoinUs = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // show button spinner
     setDisabled(true);
     const { email, password } = data;
 
     // Login User
-    signIn(email, password)
+    await signIn(email, password)
       .then(() => {
         toast.success("Logged in successfuly");
         navigate("/");
       })
       .catch(() => {
         toast.error("Email or Password did not match");
+        // hide the button spinner
+        setDisabled(false);
       });
   };
 
   // Google Sign In
-  const handleGoogleLogin = () => {
-    signInWithGoogle()
+  const handleGoogleLogin = async () => {
+    // show button spinner
+    setDisabled(true);
+    await signInWithGoogle()
       .then((result) => {
-        console.log(result.user);
         toast.success("Google Login Successful");
         navigate("/");
       })
       .catch((error) => {
         toast.error(error.message);
+        // hide button spinner
+        setDisabled(false);
       });
   };
 
