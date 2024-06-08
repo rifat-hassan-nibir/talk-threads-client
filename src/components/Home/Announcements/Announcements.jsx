@@ -1,4 +1,4 @@
-import Gap from "../../Gap";
+import Gap from "../../Common/Gap";
 import AnnouncementCard from "./AnnouncementCard";
 
 const Announcements = () => {

@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import LoadingSpinner from "../../../components/LoadingSpinner";
-import ErrorMessage from "../../../components/ErrorMessage";
-import SectionTitle from "../../../components/SectionTitle";
-import Gap from "../../../components/Gap";
+import LoadingSpinner from "../../../components/Common/LoadingSpinner";
+import ErrorMessage from "../../../components/Common/ErrorMessage";
+import SectionTitle from "../../../components/Common/SectionTitle";
+import Gap from "../../../components/Common/Gap";
 import PostCard from "../../../components/Home/AllPosts/PostCard";
 
 const UserProfile = () => {

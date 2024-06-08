@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const UserInfo = ({ userName, email, photoURL }) => {
   return (
     <div>

@@ -1,8 +1,8 @@
+import SectionTitle from "../components/Common/SectionTitle";
 import AllPosts from "../components/Home/AllPosts/AllPosts";
 import AllTags from "../components/Home/AllTags";
 import Announcements from "../components/Home/Announcements/Announcements";
 import Hero from "../components/Home/Hero";
-import SectionTitle from "../components/SectionTitle";
 
 const Home = () => {
   return (

@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import LoadingSpinner from "../components/LoadingSpinner";
-import ErrorMessage from "../components/ErrorMessage";
-import Tag from "../components/Tag";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { IoShareSocialOutline } from "react-icons/io5";
+import LoadingSpinner from "../components/Common/LoadingSpinner";
+import ErrorMessage from "../components/Common/ErrorMessage";
+import Tag from "../components/Common/Tag";
 
 const SinglePost = () => {
   const { id } = useParams();

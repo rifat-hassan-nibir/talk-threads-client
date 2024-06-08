@@ -1,5 +1,5 @@
-import Gap from "../Gap";
-import Tag from "../Tag";
+import Gap from "../Common/Gap";
+import Tag from "../Common/Tag";
 
 export const tags = [
   "General",

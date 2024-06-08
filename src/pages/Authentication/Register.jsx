@@ -6,7 +6,7 @@ import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
-import ButtonSpinner from "../../components/ButtonSpinner";
+import ButtonSpinner from "../../components/Common/ButtonSpinner";
 
 const Register = () => {
   const { createUser, signInWithGoogle, updateUserProfile } = useContext(AuthContext);

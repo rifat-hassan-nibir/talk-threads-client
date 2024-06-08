@@ -6,7 +6,7 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import { tags } from "../../../components/Home/AllTags";
 import toast from "react-hot-toast";
 import axios from "axios";
-import ButtonSpinner from "../../../components/ButtonSpinner";
+import ButtonSpinner from "../../../components/Common/ButtonSpinner";
 
 const AddPost = () => {
   const { user } = useContext(AuthContext);

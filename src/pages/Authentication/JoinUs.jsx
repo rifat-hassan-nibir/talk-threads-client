@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 import { AuthContext } from "../../providers/AuthProvider";
-import ButtonSpinner from "../../components/ButtonSpinner";
+import ButtonSpinner from "../../components/Common/ButtonSpinner";
 
 const JoinUs = () => {
   const { signIn, signInWithGoogle } = useContext(AuthContext);

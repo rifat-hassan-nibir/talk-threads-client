@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 import { useContext } from "react";
-import { AuthContext } from "../providers/AuthProvider";
-import noUser from "../assets/no-user.png";
+import { AuthContext } from "../../providers/AuthProvider";
+import noUser from "../../assets/no-user.png";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);

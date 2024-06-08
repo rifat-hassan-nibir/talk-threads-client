@@ -1,12 +1,12 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext } from "react";
-import LoadingSpinner from "../../../components/LoadingSpinner";
-import ErrorMessage from "../../../components/ErrorMessage";
 import { AuthContext } from "../../../providers/AuthProvider";
 import MyPostsRow from "../../../components/TableRows/Common/MyPostsRow";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import LoadingSpinner from "../../../components/Common/LoadingSpinner";
+import ErrorMessage from "../../../components/Common/ErrorMessage";
 
 const MyPosts = () => {
   const { user } = useContext(AuthContext);

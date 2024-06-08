@@ -1,9 +1,9 @@
-import Gap from "../../Gap";
 import PostCard from "./PostCard";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import LoadingSpinner from "../../LoadingSpinner";
-import ErrorMessage from "../../ErrorMessage";
+import Gap from "../../Common/Gap";
+import LoadingSpinner from "../../Common/LoadingSpinner";
+import ErrorMessage from "../../Common/ErrorMessage";
 
 const AllPosts = () => {
   const {
