@@ -4,7 +4,6 @@ import Tag from "../Common/Tag";
 
 const AllTags = () => {
   const [tags] = useTags();
-  console.log(tags);
   return (
     <div>
       <div className="max-h-[75vh] overflow-auto">

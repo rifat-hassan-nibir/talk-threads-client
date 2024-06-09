@@ -25,7 +25,7 @@ const MakeAnnouncement = () => {
     // show button spinner
     setDisabled(true);
     try {
-      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/announcement`, announcement);
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/announcements`, announcement);
       if (data.insertedId) {
         navigate("/dashboard");
         toast.success("Announcement added successfully");
