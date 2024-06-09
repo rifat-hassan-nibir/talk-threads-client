@@ -1,23 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
 import Gap from "../../Common/Gap";
 import AnnouncementCard from "./AnnouncementCard";
-import axios from "axios";
 import LoadingSpinner from "../../Common/LoadingSpinner";
 import ErrorMessage from "../../Common/ErrorMessage";
+import useAnnouncements from "../../../hooks/useAnnouncements";
 
 const Announcements = () => {
-  const {
-    data: announcements = [],
-    isPending,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["announcements"],
-    queryFn: async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/announcements`);
-      return data;
-    },
-  });
+  const [announcements, isPending, isError, error] = useAnnouncements();
 
   if (isPending) return <LoadingSpinner />;
   if (isError && error) return <ErrorMessage error={error} />;

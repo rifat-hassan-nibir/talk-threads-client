@@ -1,9 +1,14 @@
 import useTags from "../../hooks/useTags";
+import ErrorMessage from "../Common/ErrorMessage";
 import Gap from "../Common/Gap";
+import LoadingSpinner from "../Common/LoadingSpinner";
 import Tag from "../Common/Tag";
 
 const AllTags = () => {
-  const [tags] = useTags();
+  const [tags, isPending, isError, error] = useTags();
+
+  if (isPending) return <LoadingSpinner />;
+  if (isError && error) return <ErrorMessage error={error} />;
   return (
     <div>
       <div className="max-h-[75vh] overflow-auto">

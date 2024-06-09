@@ -1,19 +1,21 @@
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect, useState } from "react";
 
 const useTags = () => {
-  const [tags, setTags] = useState([]);
+  const {
+    data: tags = [],
+    isPending,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["tags"],
+    queryFn: async () => {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/tags`);
+      return data;
+    },
+  });
 
-  useEffect(() => {
-    loadTags();
-  }, []);
-
-  const loadTags = async () => {
-    const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/tags`);
-    setTags(data);
-  };
-
-  return [tags];
+  return [tags, isPending, isError, error];
 };
 
 export default useTags;
