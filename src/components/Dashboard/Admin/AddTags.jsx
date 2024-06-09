@@ -20,7 +20,6 @@ const AddTags = () => {
 
   const onSubmit = async (data) => {
     const tag = { ...data };
-    console.log(tag);
 
     // show button spinner
     setDisabled(true);
