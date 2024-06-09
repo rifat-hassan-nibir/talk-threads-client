@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const UserInfo = ({ userName, email, photoURL }) => {
+const UserInfo = ({ userName, email, photoURL, role }) => {
   return (
     <div>
       <div className="flex justify-center lg:mt-10 mt-6">

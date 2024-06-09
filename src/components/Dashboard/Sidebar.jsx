@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { GrLogout } from "react-icons/gr";
 import { AiOutlineBars } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import useRole from "../../hooks/useRole";
 import UserMenu from "./Menus/UserMenu";
 import AdminMenu from "./Menus/AdminMenu";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Sidebar = () => {
+  const { logOut } = useContext(AuthContext);
   const [isActive, setActive] = useState(false);
   const { role } = useRole();
 
@@ -60,7 +62,10 @@ const Sidebar = () => {
           <hr />
 
           {/* Logout Button */}
-          <button className="flex w-full items-center px-4 py-2 rounded mt-5 text-white hover:bg-gray-100   hover:text-gray-700 transition-colors duration-300 transform">
+          <button
+            onClick={logOut}
+            className="flex w-full items-center px-4 py-2 rounded mt-5 text-white hover:bg-gray-100   hover:text-gray-700 transition-colors duration-300 transform"
+          >
             <GrLogout className="w-5 h-5" />
 
             <span className="mx-4 font-medium">Logout</span>

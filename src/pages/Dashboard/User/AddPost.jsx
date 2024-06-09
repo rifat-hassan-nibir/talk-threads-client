@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import ButtonSpinner from "../../../components/Common/ButtonSpinner";
 import useTags from "../../../hooks/useTags";
+import SectionTitle from "../../../components/Common/SectionTitle";
 
 const AddPost = () => {
   const { user } = useContext(AuthContext);
@@ -44,6 +45,8 @@ const AddPost = () => {
       }
     } catch (error) {
       toast.error(error.message);
+      // Hide button spinner
+      setDisabled(false);
     }
   };
 
@@ -52,7 +55,7 @@ const AddPost = () => {
       <div className="flex justify-center items-center max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div className="w-full mx-auto border bg-white lg:p-10 p-5 rounded-lg shadow-lg shadow-gray-100">
           <div className="text-center">
-            <h1 className="text-2xl font-semibold text-gray-800 sm:text-3xl dark:text-white">Add Post</h1>
+            <SectionTitle title={"Add Post"}></SectionTitle>
           </div>
 
           <div className="mt-8">
@@ -154,7 +157,7 @@ const AddPost = () => {
 
                 {/* Author's Information */}
                 <div>
-                  <label htmlFor="donator-information" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                  <label htmlFor="author-information" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
                     Author&apos;s Information:
                   </label>
                   <div className="grid grid-cols-5 gap-4 lg:gap-6 items-center">

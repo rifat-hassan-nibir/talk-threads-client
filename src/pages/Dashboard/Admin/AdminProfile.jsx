@@ -1,7 +1,9 @@
+import AddTags from "../../../components/Dashboard/Admin/AddTags";
+
 const AdminProfile = () => {
   return (
     <div>
-      <h1>Admin Profile</h1>
+      <AddTags />
     </div>
   );
 };

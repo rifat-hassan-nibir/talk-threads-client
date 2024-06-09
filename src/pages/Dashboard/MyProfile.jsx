@@ -13,7 +13,7 @@ const MyProfile = () => {
 
   return (
     <div>
-      <UserInfo userName={user.displayName} email={user.email} photoURL={user.photoURL}></UserInfo>
+      <UserInfo role={role} userName={user.displayName} email={user.email} photoURL={user.photoURL}></UserInfo>
       <Gap bigGap></Gap>
       {role === "admin" && <AdminProfile></AdminProfile>}
       {role === "user" && <UserProfile></UserProfile>}
