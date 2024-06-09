@@ -15,7 +15,6 @@ const Announcements = () => {
     queryKey: ["announcements"],
     queryFn: async () => {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/announcements`);
-      console.log(data);
       return data;
     },
   });

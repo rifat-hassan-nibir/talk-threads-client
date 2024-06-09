@@ -16,8 +16,8 @@ const Home = () => {
           {/* Annoucements */}
           <div className="lg:col-span-3 bg-white lg:px-6 px-4 lg:py-10 py-8 rounded-lg shadow-lg shadow-gray-100">
             <div className="flex items-center gap-4">
-              <SectionTitle title={"Announcements"}></SectionTitle>
               <GrAnnounce className="text-[28px]" />
+              <SectionTitle title={"Announcements"}></SectionTitle>
             </div>
             <Announcements></Announcements>
           </div>
@@ -25,8 +25,8 @@ const Home = () => {
           <div className="lg:col-span-6 bg-white lg:px-6 px-4 lg:py-10 py-8 rounded-lg shadow-lg shadow-gray-100">
             <div className="flex justify-between items-start">
               <div className="flex items-center gap-4">
-                <SectionTitle title={"All Posts"}></SectionTitle>
                 <IoDocumentTextOutline className="text-[28px]" />
+                <SectionTitle title={"All Posts"}></SectionTitle>
               </div>
 
               {/* Filter by popularity */}
@@ -40,8 +40,8 @@ const Home = () => {
           {/* All Tags */}
           <div className="lg:col-span-3 bg-white lg:px-6 px-4 lg:py-10 py-8 rounded-lg shadow-lg shadow-gray-100">
             <div className="flex items-center gap-4">
-              <SectionTitle title={"All Tags"}></SectionTitle>
               <TiTags className="text-[28px]" />
+              <SectionTitle title={"All Tags"}></SectionTitle>
             </div>
             <AllTags></AllTags>
           </div>
