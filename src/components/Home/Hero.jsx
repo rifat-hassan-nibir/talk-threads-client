@@ -1,4 +1,5 @@
-const Hero = () => {
+/* eslint-disable react/prop-types */
+const Hero = ({ handleSearch, setSearch }) => {
   return (
     <div>
       <section className="bg-white lg:my-24 my-16">
@@ -11,17 +12,18 @@ const Hero = () => {
             <p className="mt-6 text-gray-500">Ask questions, share answers, build community</p>
 
             <div className="w-full max-w-sm mx-auto shadow-lg shadow-gray-50 mt-6 bg-transparent border rounded-md  focus-within:border-blue-400 focus-within:ring focus-within:ring-primary focus-within:ring-opacity-40">
-              <form className="flex flex-col md:flex-row">
+              <form onSubmit={handleSearch} className="flex flex-col md:flex-row">
                 <input
                   type="text"
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
+                  name="searchField"
                   placeholder="Search for posts using tags"
                   className="flex-1 h-10 px-4 py-2 m-1 text-gray-700 placeholder-gray-400 bg-transparent border-none appearance-none :text-gray-200 focus:outline-none focus:placeholder-transparent"
                 />
 
-                <button
-                  type="button"
-                  className="h-10 px-4 py-2 m-1 text-white transition-colors duration-300 transform bg-primary rounded-md hover:bg-secondary"
-                >
+                <button className="h-10 px-4 py-2 m-1 text-white transition-colors duration-300 transform bg-primary rounded-md hover:bg-secondary">
                   Search
                 </button>
               </form>

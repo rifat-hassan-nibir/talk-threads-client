@@ -1,3 +1,4 @@
+import { useState } from "react";
 import SectionTitle from "../components/Common/SectionTitle";
 import AllPosts from "../components/Home/AllPosts/AllPosts";
 import AllTags from "../components/Home/AllTags";
@@ -8,9 +9,17 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import { TiTags } from "react-icons/ti";
 
 const Home = () => {
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchText = e.target.searchField.value;
+    setSearch(searchText);
+  };
+
   return (
     <div>
-      <Hero></Hero>
+      <Hero handleSearch={handleSearch} setSearch={setSearch}></Hero>
       <div className="bg-slate-50">
         <div className="container mx-auto  grid lg:grid-cols-12 lg:gap-8 gap-6 lg:py-24 py-16 lg:px-0 px-4">
           {/* Annoucements */}
@@ -35,15 +44,15 @@ const Home = () => {
               </button>
             </div>
 
-            <AllPosts></AllPosts>
+            <AllPosts search={search}></AllPosts>
           </div>
           {/* All Tags */}
           <div className="lg:col-span-3 bg-white lg:px-6 px-4 lg:py-10 py-8 rounded-lg shadow-lg shadow-gray-100">
             <div className="flex items-center gap-4">
               <TiTags className="text-[28px]" />
-              <SectionTitle title={"All Tags"}></SectionTitle>
+              <SectionTitle title={"Tags"}></SectionTitle>
             </div>
-            <AllTags></AllTags>
+            <AllTags setSearch={setSearch}></AllTags>
           </div>
         </div>
       </div>

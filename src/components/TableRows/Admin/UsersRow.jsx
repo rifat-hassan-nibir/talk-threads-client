@@ -25,7 +25,9 @@ const UsersRow = ({ user }) => {
           <div className="px-6 py-3">
             <div className="flex items-center gap-x-2">
               <div className="grow">
-                <span className="text-sm text-gray-600">{premiumMember ? "Gold" : "Bronze"}</span>
+                <span className={`text-sm text-white px-4 rounded-full py-1 ${premiumMember ? "bg-yellow-400" : "bg-amber-900"}`}>
+                  {premiumMember ? "Gold" : "Bronze"}
+                </span>
               </div>
             </div>
           </div>
