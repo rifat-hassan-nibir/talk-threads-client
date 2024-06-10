@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-const Pagination = ({ postsCount, itemsPerPage, currentPage, handlePaginationButton }) => {
-  const pages = [...Array(Math.ceil(postsCount / itemsPerPage)).keys()].map((element) => element + 1);
+const Pagination = ({ itemsCount, itemsPerPage, currentPage, handlePaginationButton }) => {
+  const pages = [...Array(Math.ceil(itemsCount / itemsPerPage)).keys()].map((element) => element + 1);
   const numberOfPages = pages.length;
   return (
     <div>

@@ -3,36 +3,17 @@ import ErrorMessage from "../../../components/Common/ErrorMessage";
 import LoadingSpinner from "../../../components/Common/LoadingSpinner";
 import Pagination from "../../../components/Common/Pagination";
 import UsersRow from "../../../components/TableRows/Admin/UsersRow";
-import useAllUsers from "../../../hooks/useAllUsers";
 import axios from "axios";
+import UserSearchForm from "../../../components/Dashboard/Admin/UserSearchForm";
+import { useQuery } from "@tanstack/react-query";
 
 const ManageUsers = () => {
-  const [users, isPending, isError, error] = useAllUsers();
-
-  // for pagination
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [postsCount, setPostsCount] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  // get all posts count
-  useEffect(() => {
-    const getPostsCount = async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/users-count`);
-      setPostsCount(data.count);
-    };
-    getPostsCount();
-  }, []);
-
-  // set current page number
-  const handlePaginationButton = (pageNum) => {
-    setCurrentPage(pageNum);
-  };
-
-  if (isPending) return <LoadingSpinner />;
-  if (isError && error) return <ErrorMessage error={error} />;
+  const [search, setSearch] = useState("");
 
   return (
     <div>
+      {/* Search users */}
+      <UserSearchForm handleSearch={handleSearch} setSearch={setSearch}></UserSearchForm>
       {/* Table Section  */}
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         {/* Card  */}
@@ -107,7 +88,7 @@ const ManageUsers = () => {
         {/* Pagination */}
         <div className="p-5">
           <Pagination
-            postsCount={postsCount}
+            itemsCount={usersCount}
             itemsPerPage={itemsPerPage}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}

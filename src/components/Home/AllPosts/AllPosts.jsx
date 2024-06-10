@@ -17,11 +17,11 @@ const AllPosts = ({ search }) => {
   // get all posts count
   useEffect(() => {
     const getPostsCount = async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/posts-count`);
-      setPostsCount(data.count);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/posts-count?search=${search}`);
+      return setPostsCount(data.count);
     };
     getPostsCount();
-  }, []);
+  }, [search]);
 
   // set current page number
   const handlePaginationButton = (pageNum) => {
@@ -35,7 +35,7 @@ const AllPosts = ({ search }) => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["posts", search, currentPage],
+    queryKey: ["posts", search, currentPage, postsCount],
     queryFn: async () => {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/posts?search=${search}&page=${currentPage}&size=${itemsPerPage}`);
       return data;
@@ -59,7 +59,7 @@ const AllPosts = ({ search }) => {
 
       <div className="mt-6">
         <Pagination
-          postsCount={postsCount}
+          itemsCount={postsCount}
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
