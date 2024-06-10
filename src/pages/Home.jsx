@@ -11,15 +11,9 @@ import { TiTags } from "react-icons/ti";
 const Home = () => {
   const [search, setSearch] = useState("");
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const searchText = e.target.searchField.value;
-    setSearch(searchText);
-  };
-
   return (
     <div>
-      <Hero handleSearch={handleSearch} setSearch={setSearch}></Hero>
+      <Hero setSearch={setSearch}></Hero>
       <div className="bg-slate-50">
         <div className="container mx-auto  grid lg:grid-cols-12 lg:gap-8 gap-6 lg:py-24 py-16 lg:px-0 px-4">
           {/* Annoucements */}

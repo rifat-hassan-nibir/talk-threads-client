@@ -11,18 +11,19 @@ const ManageUsers = () => {
   const [search, setSearch] = useState("");
 
   // for pagination
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [usersCount, setUsersCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
   // get all users count
   useEffect(() => {
     const getUsersCount = async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/users-count`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/users-count?search=${search}`);
       setUsersCount(data.count);
+      setCurrentPage(1);
     };
     getUsersCount();
-  }, []);
+  }, [search]);
 
   // get all users
   const {
@@ -31,7 +32,7 @@ const ManageUsers = () => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["users", search, currentPage],
+    queryKey: ["users", search, currentPage, usersCount],
     queryFn: async () => {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/users?search=${search}&page=${currentPage}&size=${itemsPerPage}`);
       return data;
@@ -43,11 +44,9 @@ const ManageUsers = () => {
     setCurrentPage(pageNum);
   };
 
-  // Search for users
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const searchText = e.target.searchField.value;
-    setSearch(searchText);
+  // reset
+  const handleReset = () => {
+    setSearch("");
   };
 
   if (isPending) return <LoadingSpinner />;
@@ -56,7 +55,7 @@ const ManageUsers = () => {
   return (
     <div>
       {/* Search users */}
-      <UserSearchForm handleSearch={handleSearch} setSearch={setSearch}></UserSearchForm>
+      <UserSearchForm setSearch={setSearch}></UserSearchForm>
       {/* Table Section  */}
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         {/* Card  */}
@@ -129,7 +128,15 @@ const ManageUsers = () => {
           </div>
         </div>
         {/* Pagination */}
-        <div className="p-5">
+        <div className="flex justify-between items-center mt-6">
+          {/* reset button */}
+          <button
+            onClick={handleReset}
+            className="h-10 px-4 py-2 text-white transition-colors duration-300 transform bg-primary rounded-md hover:bg-secondary"
+          >
+            Reset
+          </button>
+
           <Pagination
             itemsCount={usersCount}
             itemsPerPage={itemsPerPage}

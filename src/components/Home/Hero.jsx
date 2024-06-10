@@ -1,5 +1,11 @@
 /* eslint-disable react/prop-types */
-const Hero = ({ handleSearch, setSearch }) => {
+const Hero = ({ setSearch }) => {
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchText = e.target.searchField.value;
+    setSearch(searchText);
+  };
+
   return (
     <div>
       <section className="bg-white lg:my-24 my-16">
