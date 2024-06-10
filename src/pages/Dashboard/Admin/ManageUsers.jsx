@@ -100,20 +100,19 @@ const ManageUsers = () => {
                   </tbody>
                 </table>
                 {/* End Table  */}
-
-                {/* Pagination */}
-                <div className="p-5">
-                  <Pagination
-                    postsCount={postsCount}
-                    itemsPerPage={itemsPerPage}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    handlePaginationButton={handlePaginationButton}
-                  ></Pagination>
-                </div>
               </div>
             </div>
           </div>
+        </div>
+        {/* Pagination */}
+        <div className="p-5">
+          <Pagination
+            postsCount={postsCount}
+            itemsPerPage={itemsPerPage}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            handlePaginationButton={handlePaginationButton}
+          ></Pagination>
         </div>
         {/* End Card  */}
       </div>
