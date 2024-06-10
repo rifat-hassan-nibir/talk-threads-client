@@ -1,14 +1,16 @@
 /* eslint-disable react/prop-types */
 const Pagination = ({ postsCount, itemsPerPage, currentPage, handlePaginationButton }) => {
   const pages = [...Array(Math.ceil(postsCount / itemsPerPage)).keys()].map((element) => element + 1);
-
+  const numberOfPages = pages.length;
   return (
     <div>
       {/* Pagination  */}
       <nav className="flex justify-end items-center -space-x-px">
         <button
           type="button"
-          className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
+          disabled={currentPage === 1}
+          onClick={() => handlePaginationButton(currentPage - 1)}
+          className="min-h-[38px] min-w-[38px] disabled:cursor-not-allowed disabled:bg-gray-100 py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
         >
           <svg
             className="flex-shrink-0 size-3.5"
@@ -44,7 +46,9 @@ const Pagination = ({ postsCount, itemsPerPage, currentPage, handlePaginationBut
 
         <button
           type="button"
-          className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
+          disabled={currentPage === numberOfPages}
+          onClick={() => handlePaginationButton(currentPage + 1)}
+          className="min-h-[38px] min-w-[38px] disabled:cursor-not-allowed disabled:bg-gray-100 py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm first:rounded-s-lg last:rounded-e-lg border border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
         >
           <span aria-hidden="true" className="sr-only">
             Next
