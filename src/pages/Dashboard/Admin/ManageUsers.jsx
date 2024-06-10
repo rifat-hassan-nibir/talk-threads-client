@@ -11,6 +11,7 @@ const ManageUsers = () => {
   const [search, setSearch] = useState("");
 
   // for pagination
+  // eslint-disable-next-line no-unused-vars
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [usersCount, setUsersCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);

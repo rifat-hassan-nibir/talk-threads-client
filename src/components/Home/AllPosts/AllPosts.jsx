@@ -10,6 +10,7 @@ import Pagination from "../../Common/Pagination";
 
 const AllPosts = ({ search }) => {
   // for pagination
+  // eslint-disable-next-line no-unused-vars
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [postsCount, setPostsCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,7 +23,7 @@ const AllPosts = ({ search }) => {
       setCurrentPage(1);
     };
     getPostsCount();
-  }, [search]);
+  }, [search, postsCount]);
 
   // set current page number
   const handlePaginationButton = (pageNum) => {

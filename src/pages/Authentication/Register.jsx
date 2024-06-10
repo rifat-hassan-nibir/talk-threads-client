@@ -53,7 +53,7 @@ const Register = () => {
       // update name and photo
       await updateUserProfile(name, photoURL);
 
-      toast.success("Signup successfull");
+      await toast.success("Signup successfull");
       navigate("/");
     } catch (error) {
       toast.error(error.message);
