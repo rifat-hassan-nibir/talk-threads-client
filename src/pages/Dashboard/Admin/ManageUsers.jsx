@@ -10,6 +10,49 @@ import { useQuery } from "@tanstack/react-query";
 const ManageUsers = () => {
   const [search, setSearch] = useState("");
 
+  // for pagination
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [usersCount, setUsersCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // get all users count
+  useEffect(() => {
+    const getUsersCount = async () => {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/users-count`);
+      setUsersCount(data.count);
+    };
+    getUsersCount();
+  }, []);
+
+  // get all users
+  const {
+    data: users = [],
+    isPending,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["users", search, currentPage],
+    queryFn: async () => {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/users?search=${search}&page=${currentPage}&size=${itemsPerPage}`);
+      return data;
+    },
+  });
+
+  // set current page number
+  const handlePaginationButton = (pageNum) => {
+    setCurrentPage(pageNum);
+  };
+
+  // Search for users
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchText = e.target.searchField.value;
+    setSearch(searchText);
+  };
+
+  if (isPending) return <LoadingSpinner />;
+  if (isError && error) return <ErrorMessage error={error} />;
+
   return (
     <div>
       {/* Search users */}

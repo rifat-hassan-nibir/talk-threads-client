@@ -18,7 +18,8 @@ const AllPosts = ({ search }) => {
   useEffect(() => {
     const getPostsCount = async () => {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/posts-count?search=${search}`);
-      return setPostsCount(data.count);
+      setPostsCount(data.count);
+      setCurrentPage(1);
     };
     getPostsCount();
   }, [search]);
