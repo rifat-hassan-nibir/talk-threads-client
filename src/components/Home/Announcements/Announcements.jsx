@@ -13,7 +13,7 @@ const Announcements = () => {
   return (
     <div>
       <Gap></Gap>
-      <div className="flex flex-col gap-5 max-h-[75vh] overflow-auto">
+      <div className="flex flex-col gap-5 max-h-[70vh] overflow-auto">
         {announcements &&
           announcements.map((announcement) => <AnnouncementCard announcement={announcement} key={announcement._id}></AnnouncementCard>)}
       </div>

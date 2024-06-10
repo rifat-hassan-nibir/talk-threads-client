@@ -5,8 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import Gap from "../../Common/Gap";
 import LoadingSpinner from "../../Common/LoadingSpinner";
 import ErrorMessage from "../../Common/ErrorMessage";
-import Pagination from "./Pagination";
 import { useEffect, useState } from "react";
+import Pagination from "../../Common/Pagination";
 
 const AllPosts = ({ search }) => {
   // for pagination

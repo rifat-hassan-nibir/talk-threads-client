@@ -1,10 +1,32 @@
+import { useEffect, useState } from "react";
 import ErrorMessage from "../../../components/Common/ErrorMessage";
 import LoadingSpinner from "../../../components/Common/LoadingSpinner";
+import Pagination from "../../../components/Common/Pagination";
 import UsersRow from "../../../components/TableRows/Admin/UsersRow";
 import useAllUsers from "../../../hooks/useAllUsers";
+import axios from "axios";
 
 const ManageUsers = () => {
   const [users, isPending, isError, error] = useAllUsers();
+
+  // for pagination
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [postsCount, setPostsCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // get all posts count
+  useEffect(() => {
+    const getPostsCount = async () => {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/users-count`);
+      setPostsCount(data.count);
+    };
+    getPostsCount();
+  }, []);
+
+  // set current page number
+  const handlePaginationButton = (pageNum) => {
+    setCurrentPage(pageNum);
+  };
 
   if (isPending) return <LoadingSpinner />;
   if (isError && error) return <ErrorMessage error={error} />;
@@ -78,6 +100,17 @@ const ManageUsers = () => {
                   </tbody>
                 </table>
                 {/* End Table  */}
+
+                {/* Pagination */}
+                <div className="p-5">
+                  <Pagination
+                    postsCount={postsCount}
+                    itemsPerPage={itemsPerPage}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    handlePaginationButton={handlePaginationButton}
+                  ></Pagination>
+                </div>
               </div>
             </div>
           </div>

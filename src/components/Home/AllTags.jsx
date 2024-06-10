@@ -12,7 +12,7 @@ const AllTags = ({ setSearch }) => {
   if (isError && error) return <ErrorMessage error={error} />;
   return (
     <div>
-      <div className="max-h-[75vh] overflow-auto">
+      <div className="max-h-[70vh] overflow-auto">
         <Gap></Gap>
 
         <div className="flex flex-wrap gap-3">
