@@ -5,17 +5,39 @@ import { useQuery } from "@tanstack/react-query";
 import Gap from "../../Common/Gap";
 import LoadingSpinner from "../../Common/LoadingSpinner";
 import ErrorMessage from "../../Common/ErrorMessage";
+import Pagination from "./Pagination";
+import { useEffect, useState } from "react";
 
 const AllPosts = ({ search }) => {
+  // for pagination
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [postsCount, setPostsCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // get all posts count
+  useEffect(() => {
+    const getPostsCount = async () => {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/posts-count`);
+      setPostsCount(data.count);
+    };
+    getPostsCount();
+  }, []);
+
+  // set current page number
+  const handlePaginationButton = (pageNum) => {
+    setCurrentPage(pageNum);
+  };
+
+  // get all posts
   const {
     data: posts = [],
     isPending,
     isError,
     error,
   } = useQuery({
-    queryKey: ["posts", search],
+    queryKey: ["posts", search, currentPage],
     queryFn: async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/posts?search=${search}`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/posts?search=${search}&page=${currentPage}&size=${itemsPerPage}`);
       return data;
     },
   });
@@ -27,12 +49,22 @@ const AllPosts = ({ search }) => {
     <div>
       <Gap></Gap>
 
-      <div className="flex flex-col gap-5 max-h-[75vh] overflow-auto">
+      <div className="flex flex-col gap-5 h-[70vh] overflow-auto">
         {posts.length > 0 ? (
           posts?.map((post) => <PostCard post={post} key={post._id}></PostCard>)
         ) : (
           <p className="text-center text-xl lg:mt-[100px] mt-[30px]">No posts found containing this tag</p>
         )}
+      </div>
+
+      <div className="mt-6">
+        <Pagination
+          postsCount={postsCount}
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          handlePaginationButton={handlePaginationButton}
+        ></Pagination>
       </div>
     </div>
   );

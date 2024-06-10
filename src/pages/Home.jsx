@@ -35,7 +35,7 @@ const Home = () => {
             <div className="flex justify-between items-start">
               <div className="flex items-center gap-4">
                 <IoDocumentTextOutline className="text-[28px]" />
-                <SectionTitle title={"All Posts"}></SectionTitle>
+                <SectionTitle title={"Posts"}></SectionTitle>
               </div>
 
               {/* Filter by popularity */}
