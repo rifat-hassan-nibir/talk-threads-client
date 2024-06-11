@@ -66,14 +66,14 @@ const AuthProvider = ({ children }) => {
 
   // save user data in db
   const saveUserInfo = async (user) => {
-    const userInfo = {
-      userName: user?.displayName,
-      email: user?.email,
-      role: "user",
-      premiumUser: false,
-    };
+    // const userInfo = {
+    //   userName: user?.displayName,
+    //   email: user?.email,
+    //   role: "user",
+    //   premiumUser: false,
+    // };
 
-    const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/user`, userInfo);
+    const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/user`, user);
     return data;
   };
 
@@ -99,10 +99,8 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log(currentUser);
       if (currentUser) {
         // getToken(currentUser.email);
-        saveUserInfo(currentUser);
       }
       setLoading(false);
     });
@@ -121,6 +119,7 @@ const AuthProvider = ({ children }) => {
     resetPassword,
     logOut,
     updateUserProfile,
+    saveUserInfo,
   };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;

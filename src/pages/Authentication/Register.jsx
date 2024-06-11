@@ -9,7 +9,7 @@ import axios from "axios";
 import ButtonSpinner from "../../components/Common/ButtonSpinner";
 
 const Register = () => {
-  const { createUser, signInWithGoogle, updateUserProfile } = useContext(AuthContext);
+  const { createUser, signInWithGoogle, updateUserProfile, saveUserInfo } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
@@ -51,7 +51,15 @@ const Register = () => {
       console.log(result.user);
 
       // update name and photo
-      await updateUserProfile(name, photoURL);
+      updateUserProfile(name, photoURL).then((result) => {
+        const userInfo = {
+          userName: name,
+          email: email,
+          role: "user",
+          premiumUser: false,
+        };
+        saveUserInfo(userInfo);
+      });
 
       toast.success("Signup successfull");
       navigate("/");
