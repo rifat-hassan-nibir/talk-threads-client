@@ -4,7 +4,7 @@ import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const PostCard = ({ post }) => {
-  const { _id, author_image, author_name, post_title, post_description, tag, date, upvote, downvote } = post;
+  const { _id, post_title, post_description, tag, date, upvote, downvote, authorInfo } = post;
 
   return (
     <Link to={`/post/${_id}`} className="">
@@ -23,8 +23,8 @@ const PostCard = ({ post }) => {
 
         <div className="flex items-center justify-between mt-4">
           <div className="flex items-center">
-            <img className="hidden object-cover w-10 h-10 mr-4 rounded-full sm:block" src={author_image} alt="avatar" />
-            <p className="font-bold text-gray-700">{author_name}</p>
+            <img className="hidden object-cover w-10 h-10 mr-4 rounded-full sm:block" src={authorInfo.photo} alt="avatar" />
+            <p className="font-bold text-gray-700">{authorInfo.name}</p>
           </div>
 
           {/* Comments */}

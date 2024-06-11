@@ -59,7 +59,7 @@ const AllPosts = ({ search }) => {
         )}
       </div>
 
-      <div className="mt-6">
+      <div className="mt-4">
         <Pagination
           itemsCount={postsCount}
           itemsPerPage={itemsPerPage}

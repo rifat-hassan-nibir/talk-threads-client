@@ -27,7 +27,7 @@ const SinglePost = () => {
   if (isPending) return <LoadingSpinner />;
   if (isError && error) return <ErrorMessage error={error} />;
 
-  const { _id, author_image, author_name, post_title, post_description, post_time, tag, upvote, downvote } = post;
+  const { _id, post_title, post_description, date, tag, upvote, downvote, authorInfo } = post;
 
   return (
     <div>
@@ -38,7 +38,7 @@ const SinglePost = () => {
           <div className="flex justify-between items-center mb-6">
             <div className="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
               <div className="flex-shrink-0">
-                <img className="size-12 rounded-full" src={author_image} alt="Image Description" />
+                <img className="size-12 rounded-full" src={authorInfo.photo} alt="Image Description" />
               </div>
 
               <div className="grow">
@@ -47,27 +47,13 @@ const SinglePost = () => {
                     {/* Tooltip  */}
                     <div className="hs-tooltip [--trigger:hover] [--placement:bottom] inline-block">
                       <div className="hs-tooltip-toggle sm:mb-1 block text-start cursor-pointer">
-                        <span className="font-semibold text-gray-800 dark:text-neutral-200">{author_name}</span>
+                        <span className="font-semibold text-gray-800 dark:text-neutral-200">{authorInfo.name}</span>
 
                         {/* Dropdown Card  */}
                         <div
                           className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 max-w-xs cursor-default bg-gray-900 divide-y divide-gray-700 shadow-lg rounded-xl dark:bg-neutral-950 dark:divide-neutral-700"
                           role="tooltip"
-                        >
-                          {/* Body  */}
-                          <div className="p-4 sm:p-5">
-                            <div className="mb-2 flex w-full sm:items-center gap-x-5 sm:gap-x-3">
-                              <div className="grow">
-                                <p className="text-lg font-semibold text-gray-200 dark:text-neutral-200">Leyla Ludic</p>
-                              </div>
-                            </div>
-                            <p className="text-sm text-gray-400 dark:text-neutral-400">
-                              Leyla is a Customer Success Specialist at Preline and spends her time speaking to in-house recruiters all over
-                              the world.
-                            </p>
-                          </div>
-                          {/* End Body  */}
-                        </div>
+                        ></div>
                         {/* End Dropdown Card  */}
                       </div>
                     </div>
@@ -75,7 +61,7 @@ const SinglePost = () => {
 
                     <ul className="text-xs text-gray-500 dark:text-neutral-500">
                       <li className="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
-                        {new Date(post_time).toLocaleDateString()}
+                        {new Date(date).toLocaleDateString()}
                       </li>
                     </ul>
                   </div>
