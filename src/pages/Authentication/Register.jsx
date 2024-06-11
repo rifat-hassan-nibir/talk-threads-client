@@ -53,7 +53,7 @@ const Register = () => {
       // update name and photo
       await updateUserProfile(name, photoURL);
 
-      await toast.success("Signup successfull");
+      toast.success("Signup successfull");
       navigate("/");
     } catch (error) {
       toast.error(error.message);
@@ -133,7 +133,7 @@ const Register = () => {
               <div className="grid gap-y-4">
                 {/* Name Form Group */}
                 <div>
-                  <label htmlFor="Name" className="block text-sm mb-2 dark:text-white">
+                  <label htmlFor="name" className="block text-sm mb-2 dark:text-white">
                     Username
                   </label>
                   <div className="relative">

@@ -1,4 +1,3 @@
-import { useContext, useEffect, useState } from "react";
 import ErrorMessage from "../../../components/Common/ErrorMessage";
 import LoadingSpinner from "../../../components/Common/LoadingSpinner";
 import Pagination from "../../../components/Common/Pagination";
@@ -6,10 +5,9 @@ import UsersRow from "../../../components/TableRows/Admin/UsersRow";
 import axios from "axios";
 import UserSearchForm from "../../../components/Dashboard/Admin/UserSearchForm";
 import { useQuery } from "@tanstack/react-query";
-import { AuthContext } from "../../../providers/AuthProvider";
+import { useEffect, useState } from "react";
 
 const ManageUsers = () => {
-  const { user } = useContext(AuthContext);
   const [search, setSearch] = useState("");
 
   // for pagination
