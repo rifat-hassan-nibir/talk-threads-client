@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ErrorMessage from "../../../components/Common/ErrorMessage";
 import LoadingSpinner from "../../../components/Common/LoadingSpinner";
 import Pagination from "../../../components/Common/Pagination";
@@ -6,8 +6,10 @@ import UsersRow from "../../../components/TableRows/Admin/UsersRow";
 import axios from "axios";
 import UserSearchForm from "../../../components/Dashboard/Admin/UserSearchForm";
 import { useQuery } from "@tanstack/react-query";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const ManageUsers = () => {
+  const { user } = useContext(AuthContext);
   const [search, setSearch] = useState("");
 
   // for pagination
@@ -32,6 +34,7 @@ const ManageUsers = () => {
     isPending,
     isError,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["users", search, currentPage, usersCount],
     queryFn: async () => {
@@ -119,7 +122,7 @@ const ManageUsers = () => {
 
                   <tbody className="divide-y divide-gray-200 dark:divide-neutral-700">
                     {users.map((user) => (
-                      <UsersRow user={user} key={user._id} />
+                      <UsersRow user={user} refetch={refetch} key={user._id} />
                     ))}
                   </tbody>
                 </table>
