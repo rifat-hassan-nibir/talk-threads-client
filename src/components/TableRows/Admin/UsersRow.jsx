@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 /* eslint-disable react/prop-types */
 const UsersRow = ({ user, refetch }) => {
@@ -27,11 +28,29 @@ const UsersRow = ({ user, refetch }) => {
     };
 
     try {
-      await mutateAsync(role);
+      Swal.fire({
+        title: "Are you sure you?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#2c4263",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Success!",
+            text: "This user is now an admin",
+            icon: "success",
+          });
+          await mutateAsync(role);
+        }
+      });
     } catch (error) {
       toast.error(error.message);
     }
   };
+
   return (
     <>
       <tr>

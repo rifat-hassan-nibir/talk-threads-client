@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div>
       <Hero setSearch={setSearch}></Hero>
-      <div className="bg-slate-50">
+      <div className="bg-slate-100">
         <div className="container mx-auto  grid lg:grid-cols-12 lg:gap-8 gap-6 lg:py-24 py-16 lg:px-0 px-4">
           {/* Annoucements */}
           <div className="lg:col-span-3 bg-white lg:px-6 px-4 lg:py-10 py-8 rounded-lg shadow-lg shadow-gray-100">
