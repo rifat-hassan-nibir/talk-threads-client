@@ -6,6 +6,7 @@ import { IoShareSocialOutline } from "react-icons/io5";
 import LoadingSpinner from "../components/Common/LoadingSpinner";
 import ErrorMessage from "../components/Common/ErrorMessage";
 import Tag from "../components/Common/Tag";
+import CommentSection from "../components/SinglePost/CommentSection";
 
 const SinglePost = () => {
   const { id } = useParams();
@@ -17,7 +18,7 @@ const SinglePost = () => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["post"],
+    queryKey: ["post", id],
     queryFn: async () => {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/post/${id}`);
       return data;
@@ -30,9 +31,9 @@ const SinglePost = () => {
   const { _id, post_title, post_description, date, tag, upvote, downvote, authorInfo } = post;
 
   return (
-    <div>
+    <div className="bg-slate-100 lg:py-14 py-10">
       {/* Blog Article  */}
-      <div className="max-w-3xl px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
+      <div className="max-w-3xl bg-white rounded-lg px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
         <div className="max-w-2xl">
           {/* Avatar Media  */}
           <div className="flex justify-between items-center mb-6">
@@ -48,13 +49,6 @@ const SinglePost = () => {
                     <div className="hs-tooltip [--trigger:hover] [--placement:bottom] inline-block">
                       <div className="hs-tooltip-toggle sm:mb-1 block text-start cursor-pointer">
                         <span className="font-semibold text-gray-800 dark:text-neutral-200">{authorInfo.name}</span>
-
-                        {/* Dropdown Card  */}
-                        <div
-                          className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 max-w-xs cursor-default bg-gray-900 divide-y divide-gray-700 shadow-lg rounded-xl dark:bg-neutral-950 dark:divide-neutral-700"
-                          role="tooltip"
-                        ></div>
-                        {/* End Dropdown Card  */}
                       </div>
                     </div>
                     {/* End Tooltip  */}
@@ -86,57 +80,63 @@ const SinglePost = () => {
             </div>
           </div>
           {/* End Content  */}
+
+          {/* Share Group  */}
+          <div className="pb-8 text-center mt-6">
+            <div className="inline-block bg-white shadow-md rounded-full py-3 px-4 dark:bg-neutral-800">
+              <div className="flex items-center gap-x-1.5">
+                {/* Button  */}
+                <div className="hs-tooltip inline-block">
+                  <button
+                    type="button"
+                    className="flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
+                  >
+                    <AiOutlineLike className="size-5" />
+                    {upvote}
+                  </button>
+                </div>
+                {/* Button  */}
+
+                <div className="block h-3 border-e border-gray-300 mx-3 dark:border-neutral-600"></div>
+
+                {/* Button  */}
+                <div className="hs-tooltip inline-block">
+                  <button
+                    type="button"
+                    className="hs-tooltip-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
+                  >
+                    <AiOutlineDislike className="size-5" />
+                    {downvote}
+                  </button>
+                </div>
+                {/* Button  */}
+
+                <div className="block h-3 border-e border-gray-300 mx-3 dark:border-neutral-600"></div>
+
+                {/* Button  */}
+                <div className="hs-dropdown relative inline-flex">
+                  <button
+                    type="button"
+                    id="blog-article-share-dropdown"
+                    className="hs-dropdown-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
+                  >
+                    <IoShareSocialOutline className="size-5" />
+                    Share
+                  </button>
+                </div>
+                {/* Button  */}
+              </div>
+            </div>
+
+            {/* Comment Section */}
+            <div className="mt-[50px]">
+              <CommentSection />
+            </div>
+          </div>
+          {/* End Share Group  */}
         </div>
       </div>
       {/* End Blog Article  */}
-      {/* Sticky Share Group  */}
-      <div className="pb-8 text-center">
-        <div className="inline-block bg-white shadow-md rounded-full py-3 px-4 dark:bg-neutral-800">
-          <div className="flex items-center gap-x-1.5">
-            {/* Button  */}
-            <div className="hs-tooltip inline-block">
-              <button
-                type="button"
-                className="flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
-              >
-                <AiOutlineLike className="size-5" />
-                {upvote}
-              </button>
-            </div>
-            {/* Button  */}
-
-            <div className="block h-3 border-e border-gray-300 mx-3 dark:border-neutral-600"></div>
-
-            {/* Button  */}
-            <div className="hs-tooltip inline-block">
-              <button
-                type="button"
-                className="hs-tooltip-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
-              >
-                <AiOutlineDislike className="size-5" />
-                {downvote}
-              </button>
-            </div>
-            {/* Button  */}
-
-            <div className="block h-3 border-e border-gray-300 mx-3 dark:border-neutral-600"></div>
-
-            {/* Button  */}
-            <div className="hs-dropdown relative inline-flex">
-              <button
-                type="button"
-                id="blog-article-share-dropdown"
-                className="hs-dropdown-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
-              >
-                <IoShareSocialOutline className="size-5" />
-                Share
-              </button>
-            </div>
-            {/* Button  */}
-          </div>
-        </div>
-      </div>
-      {/* End Sticky Share Group  */}
     </div>
   );
 };
