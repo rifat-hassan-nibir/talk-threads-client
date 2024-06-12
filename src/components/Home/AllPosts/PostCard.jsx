@@ -12,11 +12,11 @@ const PostCard = ({ post }) => {
   // get comments count
   useEffect(() => {
     const getCommentsCount = async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/comments-count`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/comments-count/${_id}`);
       setPostsCount(data.count);
     };
     getCommentsCount();
-  }, []);
+  }, [_id]);
 
   return (
     <Link to={`/post/${_id}`} className="">

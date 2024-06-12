@@ -9,12 +9,14 @@ import Tag from "../components/Common/Tag";
 import SectionTitle from "../components/Common/SectionTitle";
 import AllComments from "../components/SinglePost/AllComments";
 import Gap from "../components/Common/Gap";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AddComment from "../components/SinglePost/AddComment";
+import { AuthContext } from "../providers/AuthProvider";
 
 const SinglePost = () => {
   const { id } = useParams();
   const [reload, setReload] = useState(false);
+  const { user } = useContext(AuthContext);
 
   // load post data from server
   const {
@@ -136,9 +138,13 @@ const SinglePost = () => {
               </div>
 
               {/* Comments Section */}
-              <div className="mt-[50px]">
-                <AddComment post_id={_id} post_title={post_title} author_info={authorInfo} reload={reload} setReload={setReload} />
-              </div>
+              {user ? (
+                <div className="mt-[50px]">
+                  <AddComment post_id={_id} post_title={post_title} author_info={authorInfo} reload={reload} setReload={setReload} />
+                </div>
+              ) : (
+                <p className="mt-10 text-xl">Please login to comment on a post</p>
+              )}
             </div>
             {/* End Share Group  */}
           </div>
