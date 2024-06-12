@@ -17,6 +17,7 @@ const SinglePost = () => {
     isPending,
     isError,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["post", id],
     queryFn: async () => {
@@ -128,9 +129,9 @@ const SinglePost = () => {
               </div>
             </div>
 
-            {/* Comment Section */}
+            {/* Comments Section */}
             <div className="mt-[50px]">
-              <CommentSection />
+              <CommentSection post_id={_id} post_title={post_title} refetch={refetch} author_info={authorInfo} />
             </div>
           </div>
           {/* End Share Group  */}
