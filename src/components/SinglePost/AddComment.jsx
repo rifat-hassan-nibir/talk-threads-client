@@ -5,7 +5,7 @@ import { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../providers/AuthProvider";
 
-const CommentSection = ({ post_id, post_title, author_info, refetch }) => {
+const AddComment = ({ post_id, post_title, author_info, reload, setReload }) => {
   const { user } = useContext(AuthContext);
 
   const { mutateAsync } = useMutation({
@@ -16,12 +16,13 @@ const CommentSection = ({ post_id, post_title, author_info, refetch }) => {
     onSuccess: (data) => {
       if (data.insertedId) {
         toast.success("Your comment added successfully");
-        refetch();
+        setReload(!reload);
       }
     },
   });
 
-  const handleComment = (e) => {
+  // post comment function
+  const handleComment = async (e) => {
     try {
       e.preventDefault();
       const commentText = e.target.comment.value;
@@ -36,9 +37,10 @@ const CommentSection = ({ post_id, post_title, author_info, refetch }) => {
         },
         author_info,
       };
-      console.log(commentInfo);
 
-      mutateAsync(commentInfo);
+      await mutateAsync(commentInfo);
+      // Clear comment field
+      e.target.comment.value = "";
     } catch (error) {
       toast.error(error.message);
     }
@@ -65,4 +67,4 @@ const CommentSection = ({ post_id, post_title, author_info, refetch }) => {
   );
 };
 
-export default CommentSection;
+export default AddComment;

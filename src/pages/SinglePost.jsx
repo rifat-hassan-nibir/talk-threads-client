@@ -6,13 +6,15 @@ import { IoShareSocialOutline } from "react-icons/io5";
 import LoadingSpinner from "../components/Common/LoadingSpinner";
 import ErrorMessage from "../components/Common/ErrorMessage";
 import Tag from "../components/Common/Tag";
-import CommentSection from "../components/SinglePost/CommentSection";
 import SectionTitle from "../components/Common/SectionTitle";
 import AllComments from "../components/SinglePost/AllComments";
 import Gap from "../components/Common/Gap";
+import { useState } from "react";
+import AddComment from "../components/SinglePost/AddComment";
 
 const SinglePost = () => {
   const { id } = useParams();
+  const [reload, setReload] = useState(false);
 
   // load post data from server
   const {
@@ -135,7 +137,7 @@ const SinglePost = () => {
 
               {/* Comments Section */}
               <div className="mt-[50px]">
-                <CommentSection post_id={_id} post_title={post_title} refetch={refetch} author_info={authorInfo} />
+                <AddComment post_id={_id} post_title={post_title} author_info={authorInfo} reload={reload} setReload={setReload} />
               </div>
             </div>
             {/* End Share Group  */}
@@ -143,10 +145,10 @@ const SinglePost = () => {
         </div>
 
         {/* Comments section */}
-        <div className="bg-white rounded-lg px-6 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto shadow-lg shadow-gray-100 h-[600px] overflow-y-scroll">
+        <div className="bg-white w-full rounded-lg px-6 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto shadow-lg shadow-gray-100 max-h-[600px] overflow-y-auto">
           <SectionTitle title={"Comments"}></SectionTitle>
           <Gap></Gap>
-          <AllComments></AllComments>
+          <AllComments post_id={_id} refetch={refetch} reload={reload}></AllComments>
         </div>
       </div>
       {/* End Blog Article  */}
