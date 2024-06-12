@@ -45,7 +45,7 @@ const CommentSection = ({ post_id, post_title, author_info, refetch }) => {
   };
   return (
     <div>
-      <form onSubmit={handleComment} className="flex items-start gap-4">
+      <form onSubmit={handleComment} className="flex lg:flex-row flex-col items-start gap-4">
         <textarea
           placeholder="Write your comment here"
           name="comment"
