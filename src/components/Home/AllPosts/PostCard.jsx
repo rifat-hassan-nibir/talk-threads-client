@@ -2,9 +2,21 @@
 import { FaRegCommentAlt } from "react-icons/fa";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const PostCard = ({ post }) => {
+  const [postsCount, setPostsCount] = useState(0);
   const { _id, post_title, post_description, tag, date, upvote, downvote, authorInfo } = post;
+
+  // get comments count
+  useEffect(() => {
+    const getCommentsCount = async () => {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/comments-count`);
+      setPostsCount(data.count);
+    };
+    getCommentsCount();
+  }, []);
 
   return (
     <Link to={`/post/${_id}`} className="">
@@ -30,7 +42,7 @@ const PostCard = ({ post }) => {
           {/* Comments */}
           <div className="flex items-center gap-2">
             <FaRegCommentAlt className="size-4" />
-            <p>5</p>
+            <p>{postsCount}</p>
           </div>
 
           {/* Votes */}

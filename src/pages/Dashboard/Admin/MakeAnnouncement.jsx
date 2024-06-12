@@ -20,14 +20,18 @@ const MakeAnnouncement = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const announcement = { ...data, adminInfo: { image: user?.photoURL, email: user?.email, username: user?.displayName } };
+    const announcement = {
+      ...data,
+      date: new Date(),
+      adminInfo: { image: user?.photoURL, email: user?.email, username: user?.displayName },
+    };
 
     // show button spinner
     setDisabled(true);
     try {
       const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/announcements`, announcement);
       if (data.insertedId) {
-        navigate("/dashboard");
+        navigate("/");
         toast.success("Announcement added successfully");
       }
     } catch (error) {
