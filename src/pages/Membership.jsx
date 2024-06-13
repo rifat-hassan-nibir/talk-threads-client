@@ -3,25 +3,17 @@ import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "../components/CheckoutForm/CheckoutForm";
 import SectionTitle from "../components/Common/SectionTitle";
 import Gap from "../components/Common/Gap";
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
+import useUserInfo from "../hooks/useUserInfo";
+import LoadingSpinner from "../components/Common/LoadingSpinner";
+import ErrorMessage from "../components/Common/ErrorMessage";
 
 const Membership = () => {
-  const { user } = useContext(AuthContext);
   const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, isPending, isError, error] = useUserInfo();
 
-  useEffect(() => {
-    // get premiumMember status from db
-    const getPremiumMember = async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/user/${user?.email}`);
-      setUserInfo(data);
-    };
-
-    getPremiumMember();
-  }, [user?.email]);
+  if (isPending) return <LoadingSpinner />;
+  if (isError) return <ErrorMessage error={error} />;
 
   return (
     <div className="container px-4 mx-auto lg:my-[150px] mt-[100px]">

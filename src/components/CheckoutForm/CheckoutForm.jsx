@@ -24,7 +24,6 @@ const CheckoutForm = () => {
   // get client secret
   const getClientSecret = async (price) => {
     const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/create-payment-intent`, price);
-    console.log("client secret", data.clientSecret);
     setClientSecret(data.clientSecret);
   };
 

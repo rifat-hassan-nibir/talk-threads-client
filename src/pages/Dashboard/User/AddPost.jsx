@@ -65,7 +65,7 @@ const AddPost = () => {
   return (
     <div>
       <div className="flex justify-center items-center max-w-[85rem] py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        {postsCount >= 5 && userInfo?.premiumUser === false ? (
+        {postsCount > 4 && userInfo?.premiumUser === false ? (
           <BecomeMember></BecomeMember>
         ) : (
           <div className="w-full mx-auto border bg-white lg:p-10 p-5 rounded-lg shadow-lg shadow-gray-100">

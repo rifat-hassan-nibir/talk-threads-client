@@ -15,7 +15,7 @@ const usePostsCount = () => {
     queryKey: ["postsCount", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/posts-count/${user?.email}`);
-      return data;
+      return data.count;
     },
   });
 

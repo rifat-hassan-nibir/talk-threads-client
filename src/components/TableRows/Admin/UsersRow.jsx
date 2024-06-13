@@ -2,10 +2,13 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import useUserInfo from "../../../hooks/useUserInfo";
 
 /* eslint-disable react/prop-types */
 const UsersRow = ({ user, refetch }) => {
-  const { userName, email, premiumMember, role } = user;
+  const { userName, email, premiumUser, role } = user;
+
+  const [userInfo] = useUserInfo();
 
   // update user role
   const { mutateAsync } = useMutation({
@@ -75,8 +78,8 @@ const UsersRow = ({ user, refetch }) => {
           <div className="px-6 py-3">
             <div className="flex items-center gap-x-2">
               <div className="grow">
-                <span className={`text-sm text-white px-4 rounded-full py-1 ${premiumMember ? "bg-yellow-400" : "bg-amber-900"}`}>
-                  {premiumMember ? "Gold" : "Bronze"}
+                <span className={`text-sm text-white px-4 rounded-full py-1 ${premiumUser ? "bg-yellow-400" : "bg-amber-900"}`}>
+                  {premiumUser ? "Gold" : "Bronze"}
                 </span>
               </div>
             </div>
