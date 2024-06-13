@@ -9,6 +9,10 @@ import ButtonSpinner from "../../../components/Common/ButtonSpinner";
 import useTags from "../../../hooks/useTags";
 import SectionTitle from "../../../components/Common/SectionTitle";
 import BecomeMember from "../../../components/Dashboard/BecomeMember";
+import useUserInfo from "../../../hooks/useUserInfo";
+import usePostsCount from "../../../hooks/usePostsCount";
+import LoadingSpinner from "../../../components/Common/LoadingSpinner";
+import ErrorMessage from "../../../components/Common/ErrorMessage";
 
 const AddPost = () => {
   const { user } = useContext(AuthContext);
@@ -16,8 +20,8 @@ const AddPost = () => {
   const navigate = useNavigate();
   const currentDate = new Date();
   const [disabled, setDisabled] = useState(false);
-  const [postsCount, setPostsCount] = useState(0);
-  const [userInfo, setUserInfo] = useState([]);
+  const [postsCount, isPending, isError, error] = usePostsCount();
+  const [userInfo] = useUserInfo();
 
   // Get the data from form using React Hook Form
   const {
@@ -32,21 +36,6 @@ const AddPost = () => {
     setValue("upvote", 0);
     setValue("downvote", 0);
     setValue("date", currentDate);
-
-    // get posts count from db
-    const getPostsCount = async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/posts-count/${user?.email}`);
-      setPostsCount(data.count);
-    };
-
-    // get premiumMember status from db
-    const getPremiumMember = async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/user/${user?.email}`);
-      setUserInfo(data);
-    };
-
-    getPostsCount();
-    getPremiumMember();
   }, [user?.email, postsCount]);
 
   // Form submit
@@ -68,6 +57,10 @@ const AddPost = () => {
       setDisabled(false);
     }
   };
+
+  // Handle loading data and error
+  if (isPending) return <LoadingSpinner />;
+  if (isError && error) return <ErrorMessage error={error} />;
 
   return (
     <div>

@@ -101,6 +101,7 @@ const CheckoutForm = () => {
         // 3. change isMember to true in db
         const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/premium-users`, paymentInfo);
         console.log(data);
+        toast.success("You are now a premium member");
         navigate("/");
       } catch (error) {
         toast.error(error.message);

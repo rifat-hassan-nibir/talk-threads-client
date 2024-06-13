@@ -1,5 +1,14 @@
+import useUserInfo from "../../hooks/useUserInfo";
+import ErrorMessage from "../Common/ErrorMessage";
+import LoadingSpinner from "../Common/LoadingSpinner";
+
 /* eslint-disable react/prop-types */
-const UserInfo = ({ userName, email, photoURL, role }) => {
+const UserInfo = ({ userName, email, photoURL }) => {
+  const [userInfo, isPending, isError, error] = useUserInfo();
+
+  if (isPending) return <LoadingSpinner />;
+  if (isError && error) return <ErrorMessage error={error} />;
+
   return (
     <div>
       <div className="flex justify-center lg:mt-10 mt-6">
@@ -12,10 +21,10 @@ const UserInfo = ({ userName, email, photoURL, role }) => {
             </div>
             <p
               className={`absolute top-3 left-[50%] translate-x-[50%] flex justify-center items-center  ${
-                role === "user" ? "bg-red-900" : " bg-amber-400"
+                userInfo?.premiumUser === true ? "bg-amber-400" : "bg-red-900"
               } px-4 py-1 rounded-full mt-4 font-bold`}
             >
-              {role === "user" ? "Bronze" : "Gold"}
+              {userInfo?.premiumUser === true ? "Gold" : "Bronze"}
             </p>
           </div>
         </div>
