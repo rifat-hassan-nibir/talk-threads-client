@@ -95,7 +95,6 @@ const CheckoutForm = () => {
         transactionId: paymentIntent.id,
         date: new Date(),
       };
-      console.log(paymentInfo);
 
       try {
         // 2. save payment info in booking collection in db
