@@ -17,6 +17,7 @@ const AddPost = () => {
   const currentDate = new Date();
   const [disabled, setDisabled] = useState(false);
   const [postsCount, setPostsCount] = useState(0);
+  const [userInfo, setUserInfo] = useState([]);
 
   // Get the data from form using React Hook Form
   const {
@@ -32,12 +33,20 @@ const AddPost = () => {
     setValue("downvote", 0);
     setValue("date", currentDate);
 
+    // get posts count from db
     const getPostsCount = async () => {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/posts-count/${user?.email}`);
       setPostsCount(data.count);
     };
 
+    // get premiumMember status from db
+    const getPremiumMember = async () => {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/user/${user?.email}`);
+      setUserInfo(data);
+    };
+
     getPostsCount();
+    getPremiumMember();
   }, [user?.email, postsCount]);
 
   // Form submit
@@ -63,7 +72,7 @@ const AddPost = () => {
   return (
     <div>
       <div className="flex justify-center items-center max-w-[85rem] py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        {postsCount >= 5 ? (
+        {postsCount >= 5 && userInfo?.premiumUser === false ? (
           <BecomeMember></BecomeMember>
         ) : (
           <div className="w-full mx-auto border bg-white lg:p-10 p-5 rounded-lg shadow-lg shadow-gray-100">

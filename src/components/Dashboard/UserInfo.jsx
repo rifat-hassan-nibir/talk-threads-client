@@ -10,8 +10,12 @@ const UserInfo = ({ userName, email, photoURL, role }) => {
               <h2 className="text-xl font-semibold sm:text-2xl">{userName}</h2>
               <p className="px-5 text-xs sm:text-base">{email}</p>
             </div>
-            <p className="absolute top-3 left-[50%] translate-x-[50%] flex justify-center items-center max-w-20 bg-yellow-400 px-4 py-1 rounded-full mt-4 font-bold">
-              Gold
+            <p
+              className={`absolute top-3 left-[50%] translate-x-[50%] flex justify-center items-center  ${
+                role === "user" ? "bg-red-900" : " bg-amber-400"
+              } px-4 py-1 rounded-full mt-4 font-bold`}
+            >
+              {role === "user" ? "Bronze" : "Gold"}
             </p>
           </div>
         </div>
