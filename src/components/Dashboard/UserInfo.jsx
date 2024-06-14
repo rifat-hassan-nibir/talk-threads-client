@@ -13,7 +13,7 @@ const UserInfo = ({ userName, email, photoURL }) => {
     <div>
       <div className="flex justify-center lg:mt-10 mt-6">
         <div className="relative flex flex-col justify-center w-[400px] p-6 shadow-lg rounded-xl sm:px-12 bg-primary text-white">
-          <img src={photoURL} alt="profile image" className="w-32 h-32 mx-auto rounded-full aspect-square" />
+          <img src={photoURL} alt="profile image" className="size-32 mx-auto rounded-full aspect-square" />
           <div className="space-y-4 text-center divide-y">
             <div className="my-2 space-y-1">
               <h2 className="text-xl font-semibold sm:text-2xl">{userName}</h2>
