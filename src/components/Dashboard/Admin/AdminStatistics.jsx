@@ -3,24 +3,12 @@ import Gap from "../../Common/Gap";
 import SectionTitle from "../../Common/SectionTitle";
 import { LuUsers } from "react-icons/lu";
 import { IoDocumentTextOutline } from "react-icons/io5";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import LoadingSpinner from "../../Common/LoadingSpinner";
 import ErrorMessage from "../../Common/ErrorMessage";
+import useStats from "../../../hooks/useStats";
 
 const AdminStatistics = () => {
-  const {
-    data: stats = {},
-    isPending,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["stats"],
-    queryFn: async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/admin-stats`);
-      return data;
-    },
-  });
+  const [stats, isPending, isError, error] = useStats();
 
   // Handle loading data and error
   if (isPending) return <LoadingSpinner />;

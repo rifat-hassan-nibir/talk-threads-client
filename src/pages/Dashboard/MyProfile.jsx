@@ -12,7 +12,7 @@ const MyProfile = () => {
   const { role } = useRole();
 
   return (
-    <div>
+    <div className="lg:my-10 my-6">
       <UserInfo role={role} userName={user.displayName} email={user.email} photoURL={user.photoURL}></UserInfo>
       <Gap bigGap></Gap>
       {role === "admin" && <AdminProfile></AdminProfile>}

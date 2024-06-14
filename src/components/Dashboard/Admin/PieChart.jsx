@@ -1,13 +1,13 @@
 import Chart from "react-google-charts";
+import useStats from "../../../hooks/useStats";
 
 const PieChart = () => {
+  const [stats] = useStats();
   const data = [
-    ["Task", "Hours per Day"],
-    ["Work", 11],
-    ["Eat", 2],
-    ["Commute", 2],
-    ["Watch TV", 2],
-    ["Sleep", 7],
+    ["Name", "Number"],
+    ["Total Users", stats.usersCount],
+    ["Total Posts", stats.postsCount],
+    ["Total Comments", stats.commentsCount],
   ];
 
   return (
