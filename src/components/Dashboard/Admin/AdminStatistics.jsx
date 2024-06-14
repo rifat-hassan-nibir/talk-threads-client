@@ -3,8 +3,29 @@ import Gap from "../../Common/Gap";
 import SectionTitle from "../../Common/SectionTitle";
 import { LuUsers } from "react-icons/lu";
 import { IoDocumentTextOutline } from "react-icons/io5";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import LoadingSpinner from "../../Common/LoadingSpinner";
+import ErrorMessage from "../../Common/ErrorMessage";
 
 const AdminStatistics = () => {
+  const {
+    data: stats = {},
+    isPending,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["stats"],
+    queryFn: async () => {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/admin-stats`);
+      return data;
+    },
+  });
+
+  // Handle loading data and error
+  if (isPending) return <LoadingSpinner />;
+  if (isError && error) return <ErrorMessage error={error} />;
+
   return (
     <div>
       {/* Card Section  */}
@@ -27,7 +48,7 @@ const AdminStatistics = () => {
                   <div className="hs-tooltip"></div>
                 </div>
                 <div className="mt-1 flex items-center gap-x-2">
-                  <h3 className="text-xl sm:text-2xl font-medium text-gray-800">72,540</h3>
+                  <h3 className="text-xl sm:text-2xl font-medium text-gray-800">{stats?.usersCount}</h3>
                 </div>
               </div>
             </div>
@@ -43,10 +64,10 @@ const AdminStatistics = () => {
 
               <div className="grow">
                 <div className="flex items-center gap-x-2">
-                  <p className="text-xs uppercase tracking-wide text-gray-500">Sessions</p>
+                  <p className="text-xs uppercase tracking-wide text-gray-500">Total Posts</p>
                 </div>
                 <div className="mt-1 flex items-center gap-x-2">
-                  <h3 className="text-xl font-medium text-gray-800">29.4%</h3>
+                  <h3 className="text-xl sm:text-2xl font-medium text-gray-800">{stats?.postsCount}</h3>
                 </div>
               </div>
             </div>
@@ -62,10 +83,10 @@ const AdminStatistics = () => {
 
               <div className="grow">
                 <div className="flex items-center gap-x-2">
-                  <p className="text-xs uppercase tracking-wide text-gray-500">Avg. Click Rate</p>
+                  <p className="text-xs uppercase tracking-wide text-gray-500">Total Comments</p>
                 </div>
                 <div className="mt-1 flex items-center gap-x-2">
-                  <h3 className="text-xl sm:text-2xl font-medium text-gray-800">56.8%</h3>
+                  <h3 className="text-xl sm:text-2xl font-medium text-gray-800">{stats?.commentsCount}</h3>
                 </div>
               </div>
             </div>

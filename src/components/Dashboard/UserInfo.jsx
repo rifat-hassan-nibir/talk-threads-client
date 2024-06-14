@@ -3,7 +3,7 @@ import ErrorMessage from "../Common/ErrorMessage";
 import LoadingSpinner from "../Common/LoadingSpinner";
 
 /* eslint-disable react/prop-types */
-const UserInfo = ({ userName, email, photoURL }) => {
+const UserInfo = ({ userName, email, photoURL, role }) => {
   const [userInfo, isPending, isError, error] = useUserInfo();
 
   if (isPending) return <LoadingSpinner />;
@@ -19,13 +19,17 @@ const UserInfo = ({ userName, email, photoURL }) => {
               <h2 className="text-xl font-semibold sm:text-2xl">{userName}</h2>
               <p className="px-5 text-xs sm:text-base">{email}</p>
             </div>
-            <p
-              className={`absolute top-3 left-[50%] translate-x-[50%] flex justify-center items-center  ${
-                userInfo?.premiumUser === true ? "bg-amber-400" : "bg-red-900"
-              } px-4 py-1 rounded-full mt-4 font-bold`}
-            >
-              {userInfo?.premiumUser === true ? "Gold" : "Bronze"}
-            </p>
+            {role === "user" ? (
+              <p
+                className={`absolute top-3 left-[50%] translate-x-[50%] flex justify-center items-center  ${
+                  userInfo?.premiumUser === true ? "bg-amber-400" : "bg-red-900"
+                } px-4 py-1 rounded-full mt-4 font-bold`}
+              >
+                {userInfo?.premiumUser === true ? "Gold" : "Bronze"}
+              </p>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
