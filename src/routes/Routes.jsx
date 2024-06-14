@@ -14,6 +14,7 @@ import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import ReportedComments from "../pages/Dashboard/Admin/ReportedComments";
 import MyProfile from "../pages/Dashboard/MyProfile";
 import MakeAnnouncement from "../pages/Dashboard/Admin/MakeAnnouncement";
+import AllCommentsPage from "../pages/AllCommentsPage";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/post/:id",
-        element: <SinglePost />,
+        element: (
+          <PrivateRoute>
+            <SinglePost />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/comments/:id",
+        element: (
+          <PrivateRoute>
+            <AllCommentsPage />
+          </PrivateRoute>
+        ),
       },
     ],
   },

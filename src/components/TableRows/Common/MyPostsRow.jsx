@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 const MyPostsRow = ({ post, handleDelete }) => {
   const { _id, post_title, upvote, downvote } = post;
   return (
@@ -34,12 +35,12 @@ const MyPostsRow = ({ post, handleDelete }) => {
         {/* Comments */}
         <td className="size-px whitespace-nowrap">
           <div className="px-6 py-3">
-            <button
-              type="button"
+            <Link
+              to={`/comments/${_id}`}
               className="py-2 px-5 inline-flex items-center gap-x-2 text-sm rounded-md border border-gray-200 bg-primary text-white shadow-sm hover:bg-secondary transition-all"
             >
               Comments
-            </button>
+            </Link>
           </div>
         </td>
         {/* Action */}

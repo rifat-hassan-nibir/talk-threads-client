@@ -33,6 +33,7 @@ const AddComment = ({ post_id, post_title, author_info, reload, setReload }) => 
         time: new Date(),
         commenter_info: {
           name: user.displayName,
+          email: user.email,
           photo: user.photoURL,
         },
         author_info,
