@@ -44,11 +44,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/post/:id",
-        element: (
-          <PrivateRoute>
-            <SinglePost />
-          </PrivateRoute>
-        ),
+        element: <SinglePost />,
       },
       {
         path: "/comments/:id",

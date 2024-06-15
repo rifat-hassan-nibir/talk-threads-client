@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { IoShareSocialOutline } from "react-icons/io5";
 import LoadingSpinner from "../components/Common/LoadingSpinner";
@@ -143,7 +143,13 @@ const SinglePost = () => {
                   <AddComment post_id={_id} post_title={post_title} author_info={authorInfo} reload={reload} setReload={setReload} />
                 </div>
               ) : (
-                <p className="mt-10 text-xl">Please login to comment on a post</p>
+                <p className="mt-10 text-xl">
+                  Please{" "}
+                  <Link className="text-blue-500 underline font-semibold" to="/join-us">
+                    Login
+                  </Link>{" "}
+                  to comment on a post
+                </p>
               )}
             </div>
             {/* End Share Group  */}

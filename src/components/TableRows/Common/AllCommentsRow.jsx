@@ -42,6 +42,7 @@ const AllCommentsRow = ({ comment }) => {
     setIsOpen(true);
   }
 
+  // close modal
   function close() {
     setIsOpen(false);
   }
@@ -60,7 +61,7 @@ const AllCommentsRow = ({ comment }) => {
           <div className="px-6 py-3">
             <div className="flex items-center gap-x-2">
               <div className="grow">
-                <span className="text-sm text-gray-600">{user_comment.length > 20 ? user_comment.slice(0, 20) : ""}</span>
+                <span className="text-sm text-gray-600">{user_comment.length > 20 ? user_comment.slice(0, 20) : user_comment}</span>
                 <span className="text-sm text-gray-600">
                   {user_comment.length > 20 ? (
                     <Button onClick={open} className="text-blue-900 hover:underline">
