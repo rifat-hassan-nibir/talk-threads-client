@@ -9,12 +9,13 @@ import Swal from "sweetalert2";
 /* eslint-disable react/prop-types */
 const ReportedCommentsRow = ({ reportedComment, refetch }) => {
   const { commentInfo, feedbackValue } = reportedComment;
+  console.log(commentInfo);
   const [isOpen, setIsOpen] = useState(false);
 
   // remove report
-  const { mutateAsync } = useMutation({
-    mutationFn: async (id) => {
-      const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/remove-reported-comment/${id}`);
+  const { mutateAsync: removeReport } = useMutation({
+    mutationFn: async (reportedCommentId) => {
+      const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/remove-reported-comment/${reportedCommentId}`);
       return data;
     },
     onSuccess: (data) => {
@@ -24,6 +25,7 @@ const ReportedCommentsRow = ({ reportedComment, refetch }) => {
     },
   });
 
+  // remove reported comment function
   const handleRemoveReport = (reportId) => {
     try {
       Swal.fire({
@@ -41,7 +43,45 @@ const ReportedCommentsRow = ({ reportedComment, refetch }) => {
             text: "Report was removed.",
             icon: "success",
           });
-          await mutateAsync(reportId);
+          await removeReport(reportId);
+        }
+      });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  // delete reported comment from the post
+  const { mutateAsync: deleteComment } = useMutation({
+    mutationFn: async (commentId) => {
+      const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/delete-reported-comment/${commentId}`);
+      return data;
+    },
+    onSuccess: (data) => {
+      if (data.deletedCount > 0) {
+        refetch();
+      }
+    },
+  });
+
+  const handleDeleteComment = (commentId) => {
+    try {
+      Swal.fire({
+        title: "Do you want to delete this comment?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#2c4263",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Removed!",
+            text: "Comment was deleted.",
+            icon: "success",
+          });
+          await deleteComment(commentId);
         }
       });
     } catch (error) {
@@ -118,7 +158,7 @@ const ReportedCommentsRow = ({ reportedComment, refetch }) => {
               Remove Report
             </button>
             <button
-              //   onClick={handleReport}
+              onClick={() => handleDeleteComment(commentInfo._id)}
               className="py-2 px-5 disabled:cursor-not-allowed inline-flex items-center gap-x-2 text-sm rounded-md border border-gray-200 bg-red-500 disabled:bg-gray-300 text-white shadow-sm hover:bg-red-600 transition-all"
             >
               Delete Comment
