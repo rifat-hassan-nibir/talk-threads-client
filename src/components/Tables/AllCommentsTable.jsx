@@ -38,7 +38,7 @@ const AllCommentsTable = ({ comments }) => {
                         </div>
                       </th>
 
-                      {/* Downvote */}
+                      {/* Feedback */}
                       <th scope="col" className="px-6 py-3 text-center">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
@@ -47,7 +47,7 @@ const AllCommentsTable = ({ comments }) => {
                         </div>
                       </th>
 
-                      {/* Comments */}
+                      {/* Report */}
                       <th scope="col" className="px-6 py-3 text-center">
                         <div className="flex items-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">Report</span>

@@ -8,7 +8,6 @@ import AllCommentsTable from "../components/Tables/AllCommentsTable";
 
 const AllCommentsPage = () => {
   const { id } = useParams();
-  console.log(id);
 
   const {
     data: comments = [],

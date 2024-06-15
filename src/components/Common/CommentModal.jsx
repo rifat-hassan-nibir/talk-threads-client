@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Button, Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 
 const CommentModal = ({ commenter_info, user_comment, isOpen, close }) => {
@@ -25,7 +26,7 @@ const CommentModal = ({ commenter_info, user_comment, isOpen, close }) => {
                       className="inline-flex items-center gap-2 rounded-md bg-primary py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-primary/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white"
                       onClick={close}
                     >
-                      Got it, thanks!
+                      Close
                     </Button>
                   </div>
                 </DialogPanel>
