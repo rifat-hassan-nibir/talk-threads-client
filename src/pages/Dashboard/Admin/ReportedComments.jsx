@@ -10,11 +10,11 @@ const ReportedComments = () => {
     isPending,
     isError,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["reportedComments"],
     queryFn: async () => {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/get-reported-comments`);
-      console.log(data);
       return data;
     },
   });
@@ -24,7 +24,7 @@ const ReportedComments = () => {
 
   return (
     <div>
-      <ReportedCommentsTable reportedComments={reportedComments} />
+      <ReportedCommentsTable reportedComments={reportedComments} refetch={refetch} />
     </div>
   );
 };

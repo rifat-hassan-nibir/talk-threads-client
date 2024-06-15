@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import ReportedCommentsRow from "../TableRows/Admin/ReportedCommentsRow";
 
-const ReportedCommentsTable = ({ reportedComments }) => {
+const ReportedCommentsTable = ({ reportedComments, refetch }) => {
   return (
     <div>
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -58,7 +58,7 @@ const ReportedCommentsTable = ({ reportedComments }) => {
 
                       {/* Action */}
                       <th scope="col" className="px-6 py-3 text-center">
-                        <div className="flex items-center gap-x-2">
+                        <div className="flex items-center justify-center gap-x-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">Action</span>
                         </div>
                       </th>
@@ -67,7 +67,7 @@ const ReportedCommentsTable = ({ reportedComments }) => {
 
                   <tbody className="divide-y divide-gray-200 dark:divide-neutral-700">
                     {reportedComments.map((reportedComment) => (
-                      <ReportedCommentsRow reportedComment={reportedComment} key={reportedComment._id} />
+                      <ReportedCommentsRow reportedComment={reportedComment} refetch={refetch} key={reportedComment._id} />
                     ))}
                   </tbody>
                 </table>
