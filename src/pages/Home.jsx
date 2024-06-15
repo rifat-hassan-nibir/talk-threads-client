@@ -14,10 +14,10 @@ const Home = () => {
   return (
     <div>
       <Hero setSearch={setSearch}></Hero>
-      <div className="bg-slate-100">
-        <div className="container mx-auto grid lg:grid-cols-12 lg:gap-8 gap-6 lg:py-24 py-16 lg:px-0 px-4">
+      <div className="bg-slate-200">
+        <div className="container mx-auto grid lg:grid-cols-12 lg:gap-6 gap-6 lg:py-24 py-16 lg:px-0 px-4">
           {/* Annoucements */}
-          <div className="lg:col-span-3 bg-white lg:px-6 px-4 lg:py-10 py-8 rounded-lg shadow-lg shadow-gray-100">
+          <div className="lg:col-span-3 bg-white lg:px-6 px-4 lg:py-10 py-8 border rounded-lg">
             <div className="flex items-center gap-4">
               <GrAnnounce className="text-[28px]" />
               <SectionTitle title={"Announcements"}></SectionTitle>
@@ -25,7 +25,7 @@ const Home = () => {
             <Announcements></Announcements>
           </div>
           {/* All Posts */}
-          <div className="lg:col-span-6 bg-white lg:px-6 px-4 lg:py-10 py-8 rounded-lg shadow-lg shadow-gray-100">
+          <div className="lg:col-span-6 bg-white lg:px-6 px-4 lg:py-10 py-8 rounded-lg border ">
             <div className="flex justify-between items-start">
               <div className="flex items-center gap-4">
                 <IoDocumentTextOutline className="text-[28px]" />
@@ -41,7 +41,7 @@ const Home = () => {
             <AllPosts search={search}></AllPosts>
           </div>
           {/* All Tags */}
-          <div className="lg:col-span-3 bg-white lg:px-6 px-4 lg:py-10 py-8 rounded-lg shadow-lg shadow-gray-100">
+          <div className="lg:col-span-3 bg-white lg:px-6 px-4 lg:py-10 py-8 border rounded-lg ">
             <div className="flex items-center gap-4">
               <TiTags className="text-[28px]" />
               <SectionTitle title={"Tags"}></SectionTitle>

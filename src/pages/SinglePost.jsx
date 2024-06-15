@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
@@ -12,6 +12,7 @@ import Gap from "../components/Common/Gap";
 import { useContext, useState } from "react";
 import AddComment from "../components/SinglePost/AddComment";
 import { AuthContext } from "../providers/AuthProvider";
+import toast from "react-hot-toast";
 
 const SinglePost = () => {
   const { id } = useParams();
@@ -33,16 +34,38 @@ const SinglePost = () => {
     },
   });
 
+  // change upvote or downvote
+  const { mutateAsync: updateVote } = useMutation({
+    mutationFn: async (voteType) => {
+      const { data } = await axios.patch(`${import.meta.env.VITE_API_URL}/update-vote/${id}?vote=${voteType}`);
+      return data;
+    },
+    onSuccess: (data) => {
+      if (data.modifiedCount > 0) {
+        toast.success("Vote added");
+        refetch();
+      }
+    },
+  });
+
+  const handleVote = (vote) => {
+    try {
+      updateVote(vote);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   if (isPending) return <LoadingSpinner />;
   if (isError && error) return <ErrorMessage error={error} />;
 
   const { _id, post_title, post_description, date, tag, upvote, downvote, authorInfo } = post;
 
   return (
-    <div className="bg-slate-100 lg:py-14 py-10">
+    <div className="bg-slate-200 lg:py-14 py-10">
       <div className="container lg:max-w-4xl mx-auto flex flex-col lg:gap-10 gap-6 px-4 lg:px-0">
         {/* Blog Article  */}
-        <div className="bg-white rounded-lg px-6 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-10 mx-auto shadow-lg shadow-gray-100 h-fit">
+        <div className="bg-white rounded-lg border px-6 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-10 mx-auto h-fit">
           <div>
             {/* Avatar Media  */}
             <div className="flex justify-between items-center mb-6">
@@ -95,9 +118,10 @@ const SinglePost = () => {
               <div className="inline-block bg-white shadow-md rounded-full py-3 px-4 dark:bg-neutral-800">
                 <div className="flex items-center gap-x-1.5">
                   {/* Button  */}
-                  <div className="hs-tooltip inline-block">
+                  <div className="inline-block">
                     <button
                       type="button"
+                      onClick={() => handleVote("upvote")}
                       className="flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
                     >
                       <AiOutlineLike className="size-5" />
@@ -109,10 +133,11 @@ const SinglePost = () => {
                   <div className="block h-3 border-e border-gray-300 mx-3 dark:border-neutral-600"></div>
 
                   {/* Button  */}
-                  <div className="hs-tooltip inline-block">
+                  <div className=" inline-block">
                     <button
                       type="button"
-                      className="hs-tooltip-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
+                      onClick={() => handleVote("downvote")}
+                      className="flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
                     >
                       <AiOutlineDislike className="size-5" />
                       {downvote}
@@ -123,7 +148,7 @@ const SinglePost = () => {
                   <div className="block h-3 border-e border-gray-300 mx-3 dark:border-neutral-600"></div>
 
                   {/* Button  */}
-                  <div className="hs-dropdown relative inline-flex">
+                  <div className="relative inline-flex">
                     <button
                       type="button"
                       id="blog-article-share-dropdown"
@@ -157,7 +182,7 @@ const SinglePost = () => {
         </div>
 
         {/* Comments section */}
-        <div className="bg-white w-full rounded-lg px-6 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto shadow-lg shadow-gray-100 max-h-[600px] overflow-y-auto">
+        <div className="bg-white w-full rounded-lg border px-6 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto max-h-[600px] overflow-y-auto">
           <SectionTitle title={"Comments"}></SectionTitle>
           <Gap></Gap>
           <AllComments post_id={_id} refetch={refetch} reload={reload}></AllComments>
