@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import Pagination from "../../Common/Pagination";
 
 const AllPosts = ({ search, popularPosts }) => {
-  console.log(popularPosts);
   // for pagination
   // eslint-disable-next-line no-unused-vars
   const [itemsPerPage, setItemsPerPage] = useState(5);

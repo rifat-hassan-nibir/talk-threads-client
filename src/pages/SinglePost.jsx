@@ -1,3 +1,4 @@
+import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton, TwitterIcon, TwitterShareButton } from "react-share";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
@@ -116,7 +117,7 @@ const SinglePost = () => {
             {/* Share Group  */}
             <div className="pb-8 text-center mt-6">
               <div className="inline-block bg-white shadow-md rounded-full py-3 px-4 dark:bg-neutral-800">
-                <div className="flex items-center gap-x-1.5">
+                <div className="flex justify-center flex-wrap gap-3 items-center gap-x-1.5">
                   {/* Button  */}
                   <div className="inline-block">
                     <button
@@ -148,15 +149,23 @@ const SinglePost = () => {
                   <div className="block h-3 border-e border-gray-300 mx-3 dark:border-neutral-600"></div>
 
                   {/* Button  */}
-                  <div className="relative inline-flex">
-                    <button
-                      type="button"
-                      id="blog-article-share-dropdown"
-                      className="hs-dropdown-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
-                    >
+                  <div className="relative inline-flex gap-3">
+                    <p className="hs-dropdown-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200">
                       <IoShareSocialOutline className="size-5" />
-                      Share
-                    </button>
+                      Share to:
+                    </p>
+
+                    <FacebookShareButton url={`${import.meta.env.VITE_API_URL}/post/${id}`}>
+                      <FacebookIcon size={32} round={true}></FacebookIcon>
+                    </FacebookShareButton>
+
+                    <TwitterShareButton url={`${import.meta.env.VITE_API_URL}/post/${id}`}>
+                      <TwitterIcon size={32} round={true}></TwitterIcon>
+                    </TwitterShareButton>
+
+                    <LinkedinShareButton url={`${import.meta.env.VITE_API_URL}/post/${id}`}>
+                      <LinkedinIcon size={32} round={true}></LinkedinIcon>
+                    </LinkedinShareButton>
                   </div>
                   {/* Button  */}
                 </div>
