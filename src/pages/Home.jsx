@@ -10,6 +10,7 @@ import { TiTags } from "react-icons/ti";
 
 const Home = () => {
   const [search, setSearch] = useState("");
+  const [popularPosts, setPopularPosts] = useState(false);
 
   return (
     <div>
@@ -33,12 +34,15 @@ const Home = () => {
               </div>
 
               {/* Filter by popularity */}
-              <button className="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-primary rounded-md hover:bg-secondary transition-all">
-                Sort By Popularity
+              <button
+                onClick={() => setPopularPosts(!popularPosts)}
+                className="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-primary rounded-md hover:bg-secondary transition-all"
+              >
+                {popularPosts === false ? "Sort by Popularity" : "Reset"}
               </button>
             </div>
 
-            <AllPosts search={search}></AllPosts>
+            <AllPosts search={search} popularPosts={popularPosts}></AllPosts>
           </div>
           {/* All Tags */}
           <div className="lg:col-span-3 bg-white lg:px-6 px-4 lg:py-10 py-8 border rounded-lg ">

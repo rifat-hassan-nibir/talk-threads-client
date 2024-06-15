@@ -8,7 +8,8 @@ import ErrorMessage from "../../Common/ErrorMessage";
 import { useEffect, useState } from "react";
 import Pagination from "../../Common/Pagination";
 
-const AllPosts = ({ search }) => {
+const AllPosts = ({ search, popularPosts }) => {
+  console.log(popularPosts);
   // for pagination
   // eslint-disable-next-line no-unused-vars
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -23,7 +24,7 @@ const AllPosts = ({ search }) => {
       setCurrentPage(1);
     };
     getPostsCount();
-  }, [search, postsCount]);
+  }, [search, postsCount, popularPosts]);
 
   // set current page number
   const handlePaginationButton = (pageNum) => {
@@ -37,9 +38,11 @@ const AllPosts = ({ search }) => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["posts", search, currentPage, postsCount],
+    queryKey: ["posts", search, currentPage, postsCount, popularPosts],
     queryFn: async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/posts?search=${search}&page=${currentPage}&size=${itemsPerPage}`);
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/posts?search=${search}&page=${currentPage}&size=${itemsPerPage}&popular=${popularPosts}`
+      );
       return data;
     },
   });
