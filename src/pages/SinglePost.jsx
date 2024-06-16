@@ -155,15 +155,15 @@ const SinglePost = () => {
                       Share to:
                     </p>
 
-                    <FacebookShareButton url={`${import.meta.env.VITE_API_URL}/post/${id}`}>
+                    <FacebookShareButton url={`https://talk-threads.web.app/post/${id}`}>
                       <FacebookIcon size={32} round={true}></FacebookIcon>
                     </FacebookShareButton>
 
-                    <TwitterShareButton url={`${import.meta.env.VITE_API_URL}/post/${id}`}>
+                    <TwitterShareButton url={`https://talk-threads.web.app/post/${id}`}>
                       <TwitterIcon size={32} round={true}></TwitterIcon>
                     </TwitterShareButton>
 
-                    <LinkedinShareButton url={`${import.meta.env.VITE_API_URL}/post/${id}`}>
+                    <LinkedinShareButton url={`https://talk-threads.web.app/post/${id}`}>
                       <LinkedinIcon size={32} round={true}></LinkedinIcon>
                     </LinkedinShareButton>
                   </div>
