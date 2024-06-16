@@ -8,7 +8,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import ButtonSpinner from "../../components/Common/ButtonSpinner";
 
 const JoinUs = () => {
-  const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const { signIn, signInWithGoogle, saveUserInfo } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
@@ -44,6 +44,13 @@ const JoinUs = () => {
     setDisabled(true);
     await signInWithGoogle()
       .then((result) => {
+        const userInfo = {
+          userName: result.user.displayName,
+          email: result.user.email,
+          role: "user",
+          premiumUser: false,
+        };
+        saveUserInfo(userInfo);
         toast.success("Google Login Successful");
         navigate("/");
       })

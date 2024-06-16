@@ -77,7 +77,13 @@ const Register = () => {
     setDisabled(true);
     signInWithGoogle()
       .then((result) => {
-        console.log(result.user);
+        const userInfo = {
+          userName: result.user.displayName,
+          email: result.user.email,
+          role: "user",
+          premiumUser: false,
+        };
+        saveUserInfo(userInfo);
         toast.success("Google Login Successful");
         navigate("/");
       })

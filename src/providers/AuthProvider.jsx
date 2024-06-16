@@ -82,6 +82,7 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         getToken(currentUser.email);
+        console.log(currentUser);
       }
       setLoading(false);
     });
