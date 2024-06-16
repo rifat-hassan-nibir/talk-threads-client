@@ -7,9 +7,11 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../../../components/Common/LoadingSpinner";
 import ErrorMessage from "../../../components/Common/ErrorMessage";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const MyPosts = () => {
   const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
 
   // Get all posts of a user using email
   const {
@@ -21,7 +23,7 @@ const MyPosts = () => {
   } = useQuery({
     queryKey: ["my-posts"],
     queryFn: async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/my-posts/${user?.email}`);
+      const { data } = await axiosSecure.get(`/my-posts/${user?.email}`);
       return data;
     },
   });

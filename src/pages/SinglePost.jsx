@@ -66,7 +66,7 @@ const SinglePost = () => {
     <div className="bg-slate-200 lg:py-14 py-10">
       <div className="container lg:max-w-4xl mx-auto flex flex-col lg:gap-10 gap-6 px-4 lg:px-0">
         {/* Blog Article  */}
-        <div className="bg-white rounded-lg border px-6 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-10 mx-auto h-fit">
+        <div className="bg-white w-full rounded-lg border px-6 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-10 mx-auto h-fit">
           <div>
             {/* Avatar Media  */}
             <div className="flex justify-between items-center mb-6">

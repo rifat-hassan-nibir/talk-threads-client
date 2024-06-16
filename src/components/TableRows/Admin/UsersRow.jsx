@@ -2,13 +2,10 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
-import useUserInfo from "../../../hooks/useUserInfo";
 
 /* eslint-disable react/prop-types */
 const UsersRow = ({ user, refetch }) => {
   const { userName, email, premiumUser, role } = user;
-
-  const [userInfo] = useUserInfo();
 
   // update user role
   const { mutateAsync } = useMutation({

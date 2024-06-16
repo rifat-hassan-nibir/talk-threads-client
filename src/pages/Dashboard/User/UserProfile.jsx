@@ -1,15 +1,16 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import LoadingSpinner from "../../../components/Common/LoadingSpinner";
 import ErrorMessage from "../../../components/Common/ErrorMessage";
 import SectionTitle from "../../../components/Common/SectionTitle";
 import Gap from "../../../components/Common/Gap";
 import PostCard from "../../../components/Home/AllPosts/PostCard";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const UserProfile = () => {
   const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
 
   const {
     data: myPosts = [],
@@ -19,7 +20,7 @@ const UserProfile = () => {
   } = useQuery({
     queryKey: ["my-posts", user?.email],
     queryFn: async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/my-posts/${user?.email}?dateSort=descending`);
+      const { data } = await axiosSecure.get(`/my-posts/${user?.email}?dateSort=descending`);
       return data;
     },
   });

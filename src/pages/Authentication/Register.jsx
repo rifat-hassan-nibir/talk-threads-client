@@ -51,6 +51,7 @@ const Register = () => {
       console.log(result.user);
 
       // update name and photo
+      // eslint-disable-next-line no-unused-vars
       updateUserProfile(name, photoURL).then((result) => {
         const userInfo = {
           userName: name,

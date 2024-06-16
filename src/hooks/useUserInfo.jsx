@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useUserInfo = () => {
   const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
 
   const {
     data: userInfo = {},
@@ -14,7 +15,7 @@ const useUserInfo = () => {
   } = useQuery({
     queryKey: ["userInfo", user?.email],
     queryFn: async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/user/${user?.email}`);
+      const { data } = await axiosSecure.get(`/user/${user?.email}`);
       return data;
     },
   });
