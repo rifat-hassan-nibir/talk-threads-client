@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import noUser from "../../assets/no-user.png";
 import useAnnouncements from "../../hooks/useAnnouncements";
+import logo from "../../../public/talk-threds.png";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -34,7 +35,9 @@ const Navbar = () => {
         </div>
         <div className="navbar-center">
           <Link to="/" className="text-xl font-bold text-white">
-            Talk Threads
+            <div className="flex justify-center items-center">
+              <img className="lg:w-[200px] w-[150px] " src={logo} alt="Talk Threads" />
+            </div>
           </Link>
         </div>
         <div className="navbar-end gap-4">
