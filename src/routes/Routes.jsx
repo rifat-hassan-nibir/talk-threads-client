@@ -15,6 +15,8 @@ import ReportedComments from "../pages/Dashboard/Admin/ReportedComments";
 import MyProfile from "../pages/Dashboard/MyProfile";
 import MakeAnnouncement from "../pages/Dashboard/Admin/MakeAnnouncement";
 import AllCommentsPage from "../pages/AllCommentsPage";
+import AdminRoute from "./AdminRoute";
+import UserRoute from "./UserRoute";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +58,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: "/dashboard",
     element: (
@@ -66,27 +69,61 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <MyProfile />,
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "add-post",
-        element: <AddPost />,
+        element: (
+          <PrivateRoute>
+            <UserRoute>
+              <AddPost />
+            </UserRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "my-posts",
-        element: <MyPosts />,
+        element: (
+          <PrivateRoute>
+            <UserRoute>
+              <MyPosts />
+            </UserRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "manage-users",
-        element: <ManageUsers />,
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageUsers />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "reported-comments",
-        element: <ReportedComments />,
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ReportedComments />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "make-annoucement",
-        element: <MakeAnnouncement />,
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <MakeAnnouncement />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
     ],
   },
