@@ -1,7 +1,6 @@
 # Talk Threads
 
-Forum (an online platform where people can hold conversations
-in the form of posted messages)
+A forum web application where people can hold conversations in the form of posted messages.
 
 
 ### Live Site:
