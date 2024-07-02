@@ -6,14 +6,11 @@ A forum web application where people can hold conversations in the form of poste
 ### Live Site:
 <p>https://talk-threads.web.app</p>
 
-
-
 ### Server Repository
 <p>https://github.com/rifat-hassan-nibir/talk-threads-server</p>
 
 ### Admin Credentials-
-<p>Email- admin@admin.com<p/>
-<p>Password- 1234Aa</p>
+<p>Email- admin@admin.com , Password- 1234Aa<p/>
 
 ### Key Features:
 - Powerful search, dynamic pagination, voting, commenting, and social media sharing.
