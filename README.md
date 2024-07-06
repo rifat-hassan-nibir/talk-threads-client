@@ -1,6 +1,6 @@
 # Talk Threads
 
-A forum web application where users can sign up and create blog posts on various topics.
+A forum web application where users can sign up and publish blog posts on various topics.
 
 Talk Threads addresses the need for a dynamic and interactive platform, where users can engage in meaningful discussions, share their knowledge, and connect with others on various topics. It provides a space for users to create, read, and interact with blog posts through comment and voting features. Additionally, the social media sharing feature allows users to share valuable content outside the platform, spreading information further and building a sense of community.
 
